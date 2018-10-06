@@ -5,7 +5,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       <meta name="author" content="Smart Print" />
-      <link rel="shortcut icon" type="image/x-icon" href="<?=base_img()."icon/mini-icon-yellow.jpg"?>">
+      <link rel="shortcut icon" type="image/x-icon" href="<?=base_img()."icon/logo-1.png"?>">
        
         <!-- URL Theme Color untuk Chrome, Firefox OS, Opera dan Vivaldi -->
         <meta name="theme-color" content="#fff" />
@@ -150,7 +150,10 @@
       <!-- Header -->
       <header class="main-header">
          <div class="container">
-            <div class="header-content">        
+            <div class="header-content"> 
+               <a>
+                   <img src="<?= base_img()."icon/logo-3.png" ?>" style="width: 70px;margin-top: -10px;">
+               </a>          
                <nav class="site-nav">
                   <ul class="clean-list site-links">
                     <?php
