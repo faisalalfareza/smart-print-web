@@ -151,8 +151,9 @@
       <header class="main-header">
          <div class="container">
             <div class="header-content"> 
-               <a>
+               <a style="font-size: 25px;color: white;font-family: 'Trebuchet MS';">
                    <img src="<?= base_img()."icon/logo-3.png" ?>" style="width: 70px;margin-top: -10px;">
+                   Smart Print
                </a>          
                <nav class="site-nav">
                   <ul class="clean-list site-links">
@@ -228,9 +229,9 @@
                               <ul class="nav">
                                   <!-- Main menu -->                   
                                   
-                                  <li><a href="javascript:void(0)"><img src="<?=base_img()."icon/hand-care.png"?>"> &nbsp; Setiap proses dibuat dengan kasih sayang</a></li>   
-                                  <li><a href="javascript:void(0)"><img src="<?=base_img()."icon/organic-food.png"?>"> &nbsp; Tersedia pilihan pesanan Fresh dan Fried</a></li>                              
-                                  <li><a href="javascript:void(0)"><img src="<?=base_img()."icon/mask.png"?>"> &nbsp; Menggunakan rempah - rempah pilihan</a></li>
+                                  <li><a href="javascript:void(0)"><img src="<?=base_img()."icon/hand-care.png"?>"> &nbsp; Memudahkan cetak dokumen tanpa ribet</a></li>   
+                                  <li><a href="javascript:void(0)"><img src="<?=base_img()."icon/organic-food.png"?>"> &nbsp; Tersedia pilihan merchant yang terpercaya</a></li>                              
+                                  <li><a href="javascript:void(0)"><img src="<?=base_img()."icon/mask.png"?>"> &nbsp; Fleksibilitas menghemat waktu dan tenaga  </a></li>
                                   
                               </ul>
                           </div>
