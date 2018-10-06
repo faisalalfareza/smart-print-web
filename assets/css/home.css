@@ -1,0 +1,397 @@
+/* Start : Welcome Standart Style */
+
+html, body {
+    background-image: url('../images/background.jpg');
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;    
+    background-size: cover;
+    background-attachment: fixed;                
+    color: #636b6f;
+    font-family: 'Calibri Light', Lato, Raleway, sans-serif;
+    font-weight: bold;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    margin-top: -60px;
+    text-align: center;
+}
+
+.title {
+    font-size: 55px;
+}
+
+.sub-title {
+    font-size: 45px;
+    margin-top: -3%;
+    font-weight: bold;
+}
+
+.title.m-b-md , .sub-title.m-b-md {
+    color: #34495e;
+    font-weight: bold;
+}
+
+.title b , .sub-title b {
+    color: #3498db;
+    font-weight: bold;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.links a.btn {
+    outline:0;
+    border:0;
+    color:white;
+    padding:15px;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+/* End : Welcome Standart Style */
+
+.fileUpload {position: relative; overflow: hidden; }
+.fileUpload span i {color:dodgerblue;}
+.fileUpload input.upload {position: absolute;top: 0;right: 0;margin: 0;padding: 0;font-size: 20px;cursor: pointer;opacity: 0;filter: alpha(opacity=0);}
+
+
+/* Start : Modal Style */
+
+.modal { 
+    overflow: hidden; 
+}
+.modal.fade { 
+    background: rgba(64, 64, 64, 0.7);
+}
+
+.modal.fade .modal-dialog {
+  -webkit-transform: scale(0.7);
+  -moz-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.modal.fade.in .modal-dialog {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-dialog { top: 20px; /*left: 8px;*/ }
+@media(min-width:768px) {
+    .modal-dialog { top: 20px; }
+}
+.modal-content {background: #fdfdfd; border-radius: 0px; box-shadow: 0 0.15em 0.25em 0 rgba(0,0,0,0.25); /*border-radius: 0px 0px 10px 10px;*/ }
+.modal-title {font-family: "Calibri Light"; font-size:12px; font-weight: 700; letter-spacing: 1.5px; color: #95a5a6; }
+.modal-header {position:relative; padding:10px 20px; border-bottom:0px solid #DDD; font-weight:bold; text-align: center;  }
+.modal-header img {position:absolute; top: -20px; left: 5px}
+.modal-header .close {position: absolute; right: 0; top:15px; padding:10px 15px; cursor: pointer; color:#aaa; font-size:16px;}
+.modal-body {padding-bottom:20px; margin-top: -20px; }
+
+.modal-fullscreen .modal-dialog {
+  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;  
+}
+@media (min-width: 768px) {
+  .modal-fullscreen .modal-dialog {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .modal-fullscreen .modal-dialog {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .modal-fullscreen .modal-dialog {
+     width: 1170px;
+  }
+}
+
+/* End : Modal Style */
+
+/* Start : Portlet Modal */
+
+/* Portlet */
+
+.portlet {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.portlet.portlet-gray {
+}
+
+.portlet.portlet-bordered {
+}
+
+/* Portlet Title */
+.portlet-title {
+  padding: 0;
+  min-height: 40px;
+  margin-bottom: 18px;
+}
+
+.portlet-title .caption img.icon-form {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.caption {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.caption.caption-green .caption-subject,
+.caption.caption-green i {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.right { float: right; text-align: right }
+
+.portlet { height: 100% !important }
+.portlet .portlet-title .caption .close { float: right; text-align: right; padding-left: 15px; margin-top: -5px; transform: scale(1.5)}
+.portlet .portlet-title .caption .close.back { float: right; text-align: right; margin-left: 55px; margin-top: -5px; transform: scale(1.5)}
+.portlet .portlet-body blockquote {
+    background: rgba(189, 195, 199, 0.2);
+    font-family: "Lato";
+    font-weight: 300;
+    font-size: 1.1em;
+    width: 100% auto;
+}
+.portlet .portlet-body ul b, .portlet .portlet-body p b {
+  color: #B0BEC5;
+  font-weight: 700;
+  font-size: 35px;
+  font-weight: bold;
+}
+.portlet .portlet-body.layanan {}
+.portlet .portlet-body.visi-misi {}
+.portlet .portlet-body.step-mekanisme {}
+.portlet .portlet-body.detail { display: none; }
+.portlet .portlet-body.tarif-terlampir { display: none; }
+.portlet .portlet-body.janji-layanan { display: none; }
+.portlet .portlet-body.layanan-pengaduan { display: none; }
+.portlet .portlet-body.maksud-tujuan { display: none; }
+.portlet .portlet-body.tugas-fungsi { display: none; }
+.portlet .portlet-body.alur-mekanisme { display: none; }
+
+.caption.caption-red .caption-subject,
+.caption.caption-red i {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.caption.caption-purple .caption-subject,
+.caption.caption-purple i {
+  color: #8775a7;
+  font-weight: 700;
+}
+
+.caption i {
+  color: #777;
+  font-size: 15px;
+  font-weight: 300;
+  margin-top: 3px;
+}
+
+.caption-subject {
+  color: #666;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.caption-helper {
+  padding: 0;
+  margin: 0;
+  line-height: 13px;
+  color: #9eacb4;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Actions */
+.actions {
+    padding-top: 5px;
+  float: center;
+    display: inline-block;
+}
+
+.actions a {
+  margin-left: 3px;
+}
+
+.actions .btn {
+  color: #666;
+  padding: 3px 9px;
+  font-size: 13px;
+    line-height: 1.5;
+    background-color: #fff;
+    border-color: #ccc;
+    border-radius: 50px;
+}
+
+.actions .btn i {
+  font-size: 12px;
+}
+
+.actions .btn:hover {
+  background: #f2f2f2;
+}
+
+.centeredText {text-align: center; font-size: 12px; margin: 15px 0; clear: both; overflow: hidden; color:#999}
+.ruleterms a {color: #16a085; font-weight: 400}
+
+.action_btns {clear:both; overflow: hidden;}
+.action_btns button {display: block; width: 100%; padding: 10px;}
+.one {width:100%; display: block; float:left;}
+.one_half {width:50%; display: block; float:left;}
+.one_half.last {width:45%; margin-left:5%;}
+
+.one.next {
+  width: auto;
+  color:#fff;
+  float: right;
+  text-align: right; 
+}
+.one.next .btn {
+  padding: 15px;
+  padding-left: 18px;
+  padding-right: 18px;
+  box-shadow: 0 0.15em 0.25em 0 rgba(0,0,0,0.25);
+  transition: all 0.5s;
+  /*border-radius: 360px;*/
+  outline: 0;
+  border: 0;  
+}
+.one.next .btn i {
+  transform: scale(1.3);
+}
+
+/* End : Portlet Modal */
+
+/* Start : Pagination */
+
+ul.pagination.mark {
+    transform: scale(0.7);
+    transition: all 0.5s;
+    background-color: transparent;
+}
+ul.pagination.mark li {
+    border: 0;
+    margin: 1px;
+    outline: 0;
+    border-radius: 3px;
+    transition: all 0.5s;
+    background-color: #3498db;
+    box-shadow: 0 0.15em 0.25em 0 rgba(0,0,0,0.25);
+}
+ul.pagination.mark li:hover {
+    transition: all 0.5s;
+    background-color: #000;
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.25);
+}
+
+/* End : Pagination */
+
+/* Next Section */
+    .next
+    {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: auto;
+        padding: 15px;
+        z-index: 99999;
+        overflow: hidden;
+        background-color: transparent;        
+        text-align: right;
+        color: #000;
+        font-size: 0.9em;
+        cursor: default;
+    }
+    .next .btn
+    {
+        box-shadow: 0 0.15em 0.25em 0 rgba(0,0,0,0.25);
+        font-family: "Calibri Light";
+        font-weight:100;
+        transform: scale(1.5);
+        transition: all 0.5s;
+        outline: 0;
+        border: 0;
+        width: auto;
+        color:#fff;    
+    }
+    .next .btn:hover { transition: all 0.5s; }
+
+    @media(min-width:768px) {   
+        .next
+        {
+            text-align: right;
+            font-size: 0.9em;
+            cursor: default;
+            float: right;
+            color: #000;
+            right: 0;
+            top: 0;
+        }    
+        .next .btn
+        {
+            box-shadow: 0 0.15em 0.25em 0 rgba(0,0,0,0.25);
+            font-family: "Calibri Light";
+            font-weight:100;
+            transform: scale(1.4);
+            transition: all 0.5s; 
+
+            outline: 0;
+            border: 0;        
+            width: auto;
+            color:#fff; 
+        }
+        .next .btn:hover { transition: all 0.5s; }       
+    }
