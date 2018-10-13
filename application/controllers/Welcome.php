@@ -15,12 +15,15 @@ class Welcome extends CI_Controller {
             $data['role'] = $this->mwelcome->getRole($userid);
         }   
 
+        $data['news'] =  $this->mwelcome->getNews();
+        $data['artikel'] =  $this->mwelcome->getArtikel();
+
         // $url = 'http://jsonplaceholder.typicode.com/users';
         // $result = $this->curl->native_curl($url);
         // var_dump($result[0]->name);
         // $data['news'] =  $this->mwelcome->listNews();
         // $data['artikel'] =  $this->mwelcome->listArtikel();
-		$this->load->view('users/welcome');
+		$this->load->view('users/welcome', $data);
     }
     
     

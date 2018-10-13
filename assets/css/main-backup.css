@@ -1,13 +1,9 @@
-/*
-  @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
-  @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
-  @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
-*/
+
+  @import url(http://fonts.googleapis.com/css?family=Calibri Light:100,300,400,700);
 
   body {
-    background: #fbfbfb; /*#fdfdfd#fbfdfe*/
-    font-family: 'Trebuchet MS',Lato, sans-serif;
-    font-weight: 300;
+    font-family: 'Calibri Light', sans-serif;
+    font-weight: 700;
     font-size: 14px;
     line-height: 22px;
     color: #000;
@@ -58,7 +54,7 @@
   font-weight: 700;
   line-height: 1.2em;
   text-align: center;
-  font-family: "Trebuchet MS";
+  font-family: "Calibri Light";
 }
 .popover>.popover-title {
   margin-top: -10px;
@@ -174,7 +170,7 @@ btn-outline { border:1px; outline: 1px; color: inherit; background-color:transpa
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Calibri Light', sans-serif;
     font-weight: 300;
   }
 
@@ -254,24 +250,24 @@ btn-outline { border:1px; outline: 1px; color: inherit; background-color:transpa
             color: #999;
             font-weight:bold;
             text-decoration: none; 				
-            font-family:"Trebuchet MS";    
+            font-family:"Calibri Light";    
         }
         .well.forum h5.comment {
             color: #b4b4b4;
             font-size: 13px;
             padding-left: 30px;
-            font-family: "Trebuchet MS"; 
+            font-family: "Calibri Light"; 
         } 
         .well.forum h6 {
             color: #b4b4b4;
             font-size: 10px;
             padding-top: 8px;
-            font-family: "Trebuchet MS"; 
+            font-family: "Calibri Light"; 
         } 
 
         .well.forum a {
             color:#4B77BE;
-            font-family:"Trebuchet MS";
+            font-family:"Calibri Light";
         }
 
         .well.forum img {
@@ -301,7 +297,7 @@ btn-outline { border:1px; outline: 1px; color: inherit; background-color:transpa
             line-height: 20px;
             font-weight: 100;
             text-decoration: none;	
-            font-family: "Trebuchet MS";
+            font-family: "Calibri Light";
         }	
 
         .well.forum button {
@@ -421,13 +417,28 @@ btn-outline { border:1px; outline: 1px; color: inherit; background-color:transpa
 
 /* Popup Styles*/
 .modal { 
-    overflow: hidden; 
+    overflow: hidden;
+    text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+.modal-dialog {
+  text-align: left;
+  display: inline-block;
+  vertical-align: middle;
 }
 .modal.fade { 
     background: rgba(64, 64, 64, 0.7);
 }
 
 .modal.fade .modal-dialog {
+  vertical-align: middle;
 	-webkit-transform: scale(0.7);
 	-moz-transform: scale(0.7);
 	-ms-transform: scale(0.7);
@@ -436,9 +447,11 @@ btn-outline { border:1px; outline: 1px; color: inherit; background-color:transpa
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
+
 }
 
 .modal.fade.in .modal-dialog {
+  vertical-align: middle;
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-ms-transform: scale(1);
@@ -446,66 +459,16 @@ btn-outline { border:1px; outline: 1px; color: inherit; background-color:transpa
 	opacity: 1;
 }
 
-.modal-dialog { top: 20px; /*left: 8px;*/ }
+.modal-dialog { top: auto; vertical-align: middle; /*left: 8px;*/  }
 @media(min-width:768px) {
-    .modal-dialog { top: 20px; }
+    .modal-dialog { top: auto; vertical-align: middle; }
 }
-.modal-content {background: #fdfdfd; border-radius: 0px; box-shadow: 0 0.15em 0.25em 0 rgba(0,0,0,0.25); /*border-radius: 0px 0px 10px 10px;*/ }
-.modal-title {font-family: "Trebuchet MS"; font-size:12px; font-weight: 700; letter-spacing: 1.5px; color: #95a5a6; }
-.modal-header {position:relative; padding:10px 20px; border-bottom:0px solid #DDD; font-weight:bold; text-align: center; background-color: rgba(52, 152, 219, 0.1); }
+.modal-content {background: #fdfdfd; vertical-align: middle; border-radius: 0px; box-shadow: 0 0.15em 0.25em 0 rgba(0,0,0,0.25); /*border-radius: 0px 0px 10px 10px;*/ }
+.modal-title {font-family: "Calibri Light"; font-size:12px; font-weight: 700; letter-spacing: 1.5px; color: #95a5a6; }
+.modal-header {position:relative; padding:10px 20px; border-bottom:0px solid #DDD; font-weight:bold; text-align: center; }
 .modal-header img {position:absolute; top: -20px; left: 5px}
 .modal-header .close {position: absolute; right: 0; top:15px; padding:10px 15px; cursor: pointer; color:#aaa; font-size:16px;}
 .modal-body {padding-bottom:20px; margin-top: -20px; }
-
-/* Modal Fullscreen */
-.modal-fullscreen .modal-dialog {
-  margin: 0;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;  
-}
-@media (min-width: 768px) {
-  .modal-fullscreen .modal-dialog {
-    width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .modal-fullscreen .modal-dialog {
-    width: 970px;
-  }
-}
-@media (min-width: 1200px) {
-  .modal-fullscreen .modal-dialog {
-     width: 1170px;
-  }
-}
-
-input[type="text"].input-form,input[type="url"],input[type="email"].input-form,select,textarea.form-control {
-    border: 0;
-    border-radius: 0;
-    transition: all 1s;
-    background-color: transparent;
-    border-bottom: 2px solid #ecf0f1;
-}
-input[type="text"].input-form:focus,input[type="url"]:focus,input[type="email"].input-form:focus,select:focus,textarea.form-control:focus {
-    border: 0;
-    border-radius: 0;
-    transition: all 1s;
-    background-color: transparent;
-    border-bottom: 2px solid #3498db;
-}
-input[type="text"].input-form:hover,input[type="url"]:hover,input[type="email"].input-form:hover,select:hover,textarea.form-control:hover {
-    border: 0;
-    border-radius: 0;
-    transition: all 1s;
-    background-color: transparent;
-    border-bottom: 2px solid #ecf0f1;
-}
-input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-webkit-input-placeholder,input[type="email"].input-form::-webkit-input-placeholder,select::-webkit-input-placeholder,textarea.form-control::-webkit-input-placeholder {
-    color: #16a085;
-    font-size: 12px;
-    font-weight: 100;
-}
 
 .input-group-addon { outline: 0; border: 0; color: #16a085 }
 
@@ -518,10 +481,10 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
 .social_login .social_box:hover {background-color: #2c3e50; -webkit-transition: all 1s; -moz-transition: all 1s; transition: all 1s; text-decoration:blink;}
 
 .centeredText {text-align: center; font-size: 12px; margin: 15px 0; clear: both; overflow: hidden; color:#999}
-.ruleterms a {color: #16a085; font-weight: 400}
+.ruleterms a {color: rgba(255,135,8, 1); font-weight: 700}
 
 .action_btns {clear:both; overflow: hidden;}
-.action_btns button {display: block; width: 100%; padding: 10px;}
+.action_btns button {display: block; padding: 10px;}
 
 .modal-footer {margin-top:0px;} 
 /* Popup Login Form */
@@ -543,6 +506,13 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
 .portlet-body.category_add {display: none;}
 .createOption { display: inline-block; padding: 20px; width: 100%; }
 
+/* Create Resume */
+.portlet-container.startStepone {}
+.portlet-container.startSteptwo {display: none;}
+.portlet-container.startStepthree {display: none;}
+.portlet-container.startStepfour {display: none;}
+.portlet-container.startStepfive {display: none;}
+
 .fileUpload {position: relative; overflow: hidden; }
 .fileUpload span i {color:dodgerblue;}
 .fileUpload input.upload {position: absolute;top: 0;right: 0;margin: 0;padding: 0;font-size: 20px;cursor: pointer;opacity: 0;filter: alpha(opacity=0);}
@@ -561,7 +531,7 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
     border: 0;
 }
 .list-group .list-group-item:hover {
-    background-color: rgba(46, 204, 113, 0.1);
+    background-color: rgba(241, 196, 15, 0.1);
     transition: all 0.5s;
     padding-left: 20px;    
 }
@@ -579,7 +549,7 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
 .list-group .list-group-item-text.sub-title {
     font-size: 12px;
     font-weight: 700;
-    color: rgba(22, 160, 133, 0.5);
+    color: #f39c12;
 }
 
 .list-group.portofolio { 
@@ -594,7 +564,7 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
     border: 0;
 }
 .list-group.portofolio .list-group-item:hover {
-    background-color: rgba(46, 204, 113, 0.1);
+    background-color: rgba(241, 196, 15, 0.1);
     transition: all 0.5s;
     padding-left: 20px;
 }
@@ -608,19 +578,19 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
     font-weight: 100;
     padding-left: 15px;
     text-decoration: none;	
-    font-family: "Trebuchet MS";
+    font-family: "Calibri Light";
 }
 .list-group.portofolio .list-group-item-heading.type {
     color: #95a5a6;
     font-size: 10px;
     padding-left: 15px;
-    font-family: "Trebuchet MS"; 
+    font-family: "Calibri Light"; 
 }
 .list-group.portofolio .list-group-item-text.sub-title {
     font-size: 12px;
     line-height: 20px;
     padding-left: 15px;
-    color: #999;
+    color: #f39c12;
     font-weight:bold;
     text-decoration: none;
 }
@@ -647,8 +617,8 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
 }
 
 .portlet-title .caption img.icon-form {
-	width: 60px;
-  height: 60px;
+	width: 30px;
+  height: 30px;
   margin-right: 10px;
 }
 
@@ -936,7 +906,7 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
 #header .navbar {
   /*box-shadow: 0 0.15em 0.25em 0 rgba(0,0,0,0.25);*/   
   /*background-color: #1BA39C;*/
-  background-image: url('../images/background/background-3.jpg');
+  background-image: url(../images/6.jpg);
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
@@ -1219,66 +1189,6 @@ ul.sub-menu {
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);
-  }
-}
-
-
-/* ----------------- 9.2. Footer ----------------- */
-.main-footer {
-  background-color: #404040;
-  padding: 60px 0;
-}
-@media (max-width: 768px) {
-  .main-footer {
-    padding: 30px 0;
-  }
-}
-.main-footer .widget .widget-title {
-  color: #ffffff;
-  text-transform: none;
-  font-family: "Trebuchet MS";
-  letter-spacing: 0.04em;
-  font-weight: bold;
-  line-height: 1em;
-  font-size: 14px;
-  margin: 0 0 20px;
-}
-.main-footer .widget p {
-  color: #ffffff;
-  letter-spacing: 0.04em;
-  font-weight: 700;
-  line-height: 1.5em;
-  font-size: 14px;
-  margin: 0 0 20px;   
-}
-.main-footer .widget ul:not(.social-block) {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.main-footer .widget ul:not(.social-block) li {
-  display: block;
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  color: #ffffff;
-  line-height: 1.2em;
-}
-.main-footer .widget ul:not(.social-block) li a:hover {
-  color: #1abc9c;
-  font-weight: bold;
-  transition: all 0.5s;
-}
-.main-footer .widget ul:not(.social-block) li:not(:last-of-type) {
-  margin-bottom: 12.5px;
-}
-@media (max-width: 992px) {
-  .main-footer .widget {
-    margin: 0 0 45px;
-  }
-}
-@media (max-width: 992px) {
-  .main-footer {
-    padding: 60px 0 15px;
   }
 }
 
@@ -2245,18 +2155,18 @@ ul.elements li > i{
 .portfolio-thumb .thumb-caption h4 {
   line-height: 1em;
   font-size: 15px;
-  font-family: "Trebuchet MS", sans-serif;
+  font-family: "Calibri Light", sans-serif;
   color: #343435;   
   font-weight: 900;
 }
 .portfolio-thumb .thumb-caption h5 {
-    font-family: "Trebuchet MS";
+    font-family: "Calibri Light";
     font-weight: 100;
     font-size: 12px;
     color: #3498db;
 }
 .portfolio-thumb .thumb-caption h6 {
-    font-family: "Trebuchet MS";
+    font-family: "Calibri Light";
     color: #3498db;
 }
 .portfolio-thumb .thumb-caption h6.status {
@@ -2322,12 +2232,12 @@ ul.elements li > i{
 .portfolio-thumb.tags .thumb-caption h4 {
   line-height: 1em;
   font-size: 15px;
-  font-family: "Trebuchet MS", sans-serif;
+  font-family: "Calibri Light", sans-serif;
   color: #343435;   
   font-weight: 900;
 }
 .portfolio-thumb.tags .thumb-caption h6 {
-  font-family: "Trebuchet MS";
+  font-family: "Calibri Light";
   color: #3498db;
 }
 .portfolio-thumb.tags .thumb-caption p {
@@ -2749,13 +2659,13 @@ Portfolio with right sidebar
 .sidebar-item .media .media-body h4 a{
   color: #7d7d7d;
   font-size: 16px;
-  font-family: "Trebuchet MS";
+  font-family: "Calibri Light";
 }
 
 .sidebar-item .media .media-body p {
   color: #b4b4b4;
   font-size: 10px;
-  font-family: "Trebuchet MS";    
+  font-family: "Calibri Light";    
 }
 
 .tag-cloud .nav-pills{
@@ -4177,7 +4087,7 @@ span.stButton_gradient,
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #f5f5f5;
+    background-color: #3498db;
     /* change if the mask should be a color other than white */
     z-index: 1000;
     /* makes sure it stays on top */
@@ -4206,7 +4116,7 @@ span.stButton_gradient,
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: #ffbf00;
+    background-color: rgba(52, 73, 94,1.0);
     opacity: 0.6;
     position: absolute;
     top: 0;

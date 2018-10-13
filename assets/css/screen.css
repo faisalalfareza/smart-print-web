@@ -2793,7 +2793,7 @@ Follow me on Twitter @maridlcrmn
   color: white;
   font-size: 12px;
   padding: 20px; 
-  font-family: "Calibri Light"; 
+  font-family: "Trebuchet MS"; 
   text-transform: uppercase;
   font-weight: 700;
   cursor: pointer;
@@ -3755,10 +3755,13 @@ a.popup-close:hover {
   padding: 0;
   margin: 0;
 }
+
 .slide-text.news {
-    background-color: rgba(41, 128, 185,0.7);
+    background-color: rgba(131, 52, 113, 0.4);
     transition: all 0.5s;
     padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 10px;
     padding-bottom: 15px;
     height: auto;
     width: 100%;
@@ -3770,13 +3773,19 @@ a.popup-close:hover {
   }  
 }
 .slide-text.news:hover {
-    background-color: rgba(41, 128, 185,1.0);
+    background-color: rgba(131, 52, 113, 0.7);
     transition: all 0.5s;
     padding-left: 15px;
 }
-.slide-news .single-news {
-  margin-top: 4em;
-  padding: 5px;
+.slide-text.news h3 {
+    font-family: "Trebuchet MS";
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #ecf0f1;   
 }
 .slide-news .single-news.first h1 {
     color: #fff;
@@ -3785,7 +3794,7 @@ a.popup-close:hover {
     font-weight: 100;
     padding-left: 15px;
     text-decoration: none;  
-    font-family: "Lato";
+    font-family: "Trebuchet MS";
 }
 .slide-news .single-news.first p {
     line-height: 20px;
@@ -3799,10 +3808,48 @@ a.popup-close:hover {
     line-height: 1.2em;    
 }
 
+.slide-text.artikel {
+    background-color: rgba(179, 55, 113, 0.4);
+    transition: all 0.5s;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    height: auto;
+    width: 100%;
+}
+@media (max-width: 768px) {
+  .slide-text.artikel {
+    height: auto;
+    width: 100%;
+  }  
+}
+.slide-text.artikel:hover {
+    background-color: rgba(179, 55, 113, 0.8);
+    transition: all 0.5s;
+    padding-left: 15px;
+}
+.slide-text.artikel h3 {
+    font-family: "Trebuchet MS";
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #ecf0f1;   
+}
+
+.owl-theme .owl-controls .owl-page span {
+    width: 8px !important;
+    height: 15px !important;
+    background: #fff !important;
+}
+
 /* -------- Parallax -------- */
 .parallax-box {
-  /*background-image: url(../images/food/17.jpg);*/
-  background-color: #e5f0f6;
+  background-image: url('../images/background/background-3.jpg');
+   background-color: #e5f0f6; 
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

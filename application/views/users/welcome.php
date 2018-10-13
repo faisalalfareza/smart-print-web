@@ -166,7 +166,7 @@
                         ?>    
                
                         <a class="btn btn-white">Timeline</a>  
-                        <a class="btn btn-white" style="border:0;">Print Document</a>  
+                        <a href="<?=site_url('index.php/project')?>" class="btn btn-white" style="border:0;">Print Document</a>  
                         <a class="btn btn-white" style="border:0;">My Document History</a>
                         <a href="<?=site_url('index.php/auth/logout')?>" class="btn btn-white" style="border:0;">Logout</a>
 
@@ -242,8 +242,66 @@
             </div>
          </section>                                
       </div>    
+
+      <!-- Parallax Box -->
+      <div class="parallax-box">
+         <div class="container-list">
+
+                <div class="col-lg-12 padding-none"> 
+                     <div class="slide-text news">
+                      <h3>Highlight News</h3>
+                        <div class="slide-news">
+                            <?php
+                                $i = 0;
+                                foreach($news as $getNews){
+                                $getContent = strip_tags($getNews->NewsContent);
+                                if (strlen($getContent) > 250) {
+                                    // truncate string
+                                    $stringCut = substr($getContent, 0, 250);
+                                    $getContent = substr($stringCut, 0, strrpos($stringCut, ' ')).'...'; 
+                                }
+                            ?>
+                            <a href="<?=site_url('home/news/detailnews/'.$this->encrypt->encode($getNews->NewsId))?>" class="single-news first">
+                                <h1><?=$getNews->NewsTitle?></h1>
+                                <p><?=$getContent?></p>
+                            </a> 
+                            <?php
+                                if (++$i == 5) break;
+                                }
+                            ?>                                
+                        </div>
+                    </div>                                  
+                </div>
+                <div class="col-lg-12 padding-none">
+                     <div class="slide-text artikel">
+                     <h3>Collection Articles</h3>
+                        <div class="slide-news">
+                            <?php
+                                $i = 0;
+                                foreach($artikel as $getArtikel){
+                                $getContent = strip_tags($getArtikel->ArtclContent);
+                                if (strlen($getContent) > 250) {
+                                    // truncate string
+                                    $stringCut = substr($getContent, 0, 250);
+                                    $getContent = substr($stringCut, 0, strrpos($stringCut, ' ')).'...'; 
+                                }
+                            ?>
+                            <a href="<?=site_url('home/artikel/detailarticle/'.$this->encrypt->encode($getArtikel->ArtclId))?>" class="single-news first">
+                                <h1><?=$getArtikel->ArtclTitle?></h1>
+                                <p><?=$getContent?></p>
+                            </a> 
+                            <?php
+                                if (++$i == 5) break;
+                                }
+                            ?>                                
+                        </div>
+                    </div>                                  
+                </div>              
+    
+        </div>
+      </div>   
        
-      <?php $this->load->view('users/modals/fauth'); ?>
+      <?php $this->load->view('users/modals/form-auth'); ?>
       <?php $this->load->view('masterpages/foot'); ?> 
        
         <!-- Custom Javascript -->

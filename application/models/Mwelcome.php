@@ -17,14 +17,14 @@ class Mwelcome extends CI_Model {
         return $query->row();
     }  
 
-    // function listNews() {
-    //     $this->db->order_by('NewsId', 'DESC');
-    //     return $this->db->get('tbnews')->result();
-    // }
-
-    // function listArtikel() {
-    //     $this->db->order_by('ArtclId', 'DESC');
-    //     return $this->db->get('tbarticle')->result();
-    // }       
+    function getNews() {
+        $this->db->order_by('NewsId', 'DESC');
+        return $this->db->get('tbnews')->result();
+    }
+    
+    function getArtikel() {
+        $this->db->order_by('ArtclId', 'DESC');
+        return $this->db->get('tbarticle')->result();
+    }       
     
 }

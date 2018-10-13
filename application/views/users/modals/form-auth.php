@@ -3,6 +3,9 @@
     $UserEmail = $this->session->userdata('sc_sess')['UserEmail']; 
 ?>  
 
+ <style>
+  .ruleterms a { color: #F79F1F }
+ </style>
 
  <!--Login Modal-->
     <div class="modal fade" id="login" role="dialog" style="z-index:9999">
@@ -28,7 +31,7 @@
                        <input id="logPass" type="password" name="UserPass" class="form-control">
                      </div>
                      <div class="checkbox">
-                         <label style="font-size:12px;"><input type="checkbox" name="remember"> &nbsp;  Ingatkan saya saat masuk </label>
+                         <label style="font-size:12px;"><input type="checkbox" name="remember"> &nbsp;  <a>Ingatkan saya saat masuk</a> </label>
                      </div>
                      <div class="action_btns">
                        <div class="one_half"><button type="button" class="btn register">Mendaftar</button></div>
