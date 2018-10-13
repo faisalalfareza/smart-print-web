@@ -31,7 +31,7 @@ class Project extends CI_Controller {
 	{
         if(isset($this->session->userdata('sc_sess')['UserId'])) {
             $userid = $this->session->userdata('sc_sess')['UserId'];
-            $data['title']        =  "Collection Project";	
+            $data['title']        =  "Print Document(s)";	
             $data['resume']       =  $this->mproject->getResume();
             $data['project']      =  $this->mproject->getProject();
             $data['artikel']      =  $this->mproject->getArtikel();
