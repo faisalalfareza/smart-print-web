@@ -105,7 +105,10 @@
                                                 <span class="caption-subject" id="caption-news"></span>
                                             </div>
                                         </div>
-                                        <span>Assign this member to project. so that members can contribute in this project <a>You can choose member that competent in the execution of this project.</a></span>
+                                        <span>
+                                            It will show you the available merchant and you may print document(s) directly through this feature.
+                                            <a>Select a Merchant in where you ready to print.</a>
+                                        </span>
                                     </div>                               
                                 </div>
                             </div>
