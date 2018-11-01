@@ -8,7 +8,7 @@ class Authm extends CI_Model {
     }
 
     function checking_unique( $email ) {  
-        return $this->db->get_where('tbuser', array('UserEmail'=>$email));
+        return $this->db->get_where('ms_user', array('UserEmail'=>$email));
     }       
 
     /* BCrypte Hashing */
@@ -23,7 +23,7 @@ class Authm extends CI_Model {
         }
     }
     function getUsers($UserPass) {
-        $query = $this->db->get('tbuser');
+        $query = $this->db->get('ms_user');
 
         if ($query->num_rows() > 0) {
 
@@ -45,11 +45,11 @@ class Authm extends CI_Model {
 
    
     function get_records() {
-        return $this->db->get('tbuser')->result();
+        return $this->db->get('ms_user')->result();
     }
 
     function add_record( $data ) {
-        return $this->db->insert('tbuser', $data);
+        return $this->db->insert('ms_user', $data);
     }   
 
     function add_to_userrole() {
@@ -57,7 +57,7 @@ class Authm extends CI_Model {
             'UserId'  => $this->db->insert_id(),            
             'RoleId'  => '2'
         );             
-        $this->db->insert('tbuser_role', $userrole);
+        $this->db->insert('ms_user_role', $userrole);
         return;
     } 
 
@@ -65,15 +65,15 @@ class Authm extends CI_Model {
         $data = array('UserStatus' => 1);
 
         $this->db->where('UserId', $id);
-        $this->db->update('tbuser', $data);
+        $this->db->update('ms_user', $data);
     }    
 
     function add_responden( $data ) {
-        return $this->db->insert('tbresponden', $data);
+        return $this->db->insert('ms_responden', $data);
     } 
 
     function add_collaborate( $data ) {
-        return $this->db->insert('tbcollaborate', $data);
+        return $this->db->insert('ms_collaborate', $data);
     } 
 
 }
