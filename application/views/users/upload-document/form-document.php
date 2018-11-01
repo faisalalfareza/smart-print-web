@@ -1,10 +1,10 @@
 <?php $UserId = $this->session->userdata('sc_sess')['UserId']; ?>  
 
-    <!--Create Resume-->
+    <!-- Upload Document -->
     <div class="modal fade" id="createResume" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="resume/create" method="post" id="formResume" class="formResume" enctype="multipart/form-data" onsubmit="return false">
+                <form action="uploadDocument" method="post" id="formResume" class="formResume" enctype="multipart/form-data" onsubmit="return false">
                     
                 <input type="hidden" name="UserId" value="<?=$UserId?>">    
                     
@@ -17,7 +17,7 @@
                                     <div class="centeredText ruleterms" style="margin: 60px 0;">
                                         <div class="portlet-title">
                                             <div class="caption caption-red">
-                                                <img src="<?=base_img()."icon/file-1.png"?>" class="icon-form">
+                                                <img src="<?=base_img()."icon/file-1-purple.png"?>" class="icon-form">
                                                 <span class="caption-subject" id="caption-news"></span>
                                             </div>
                                         </div>
@@ -42,7 +42,7 @@
                                 
                                         <div class="form-group">
                                             <label class="control-label" for="inputDefault">Tipe ID</label>
-                                            <select id="rsmReligion" name="Religion" class="form-control selectpicker show-menu-arrow show-tick" 
+                                            <select id="rsmReligion" name="TypeId" class="form-control selectpicker show-menu-arrow show-tick" 
                                             title="Select your Tipe ID" data-header="Choose those that are included in this project">
                                                 <option value="KTP">Kartu Tanda Penduduk</option>
                                                 <option value="KK">Kartu Keluarga</option>
@@ -52,12 +52,12 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label" for="inputDefault">Nomor ID</label>
-                                            <input id="rsmName" type="text" name="RsumName" class="form-control input-form" placeholder="Masukkan Nomor sesuai Tipe ID" autofocus>
+                                            <input id="rsmName" type="number" name="NumberId" class="form-control input-form" placeholder="Masukkan Nomor sesuai Tipe ID" autofocus>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label" for="inputSmall">Waktu Pengambilan (Estimasi)</label>
                                             <div class="input-group date" id="form_dt" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                <input type="text" id="rsmBirth" name="BirthDate" class="form-control input-form" placeholder="Tentukan kapan akan diambil" required readonly/>
+                                                <input type="text" id="rsmBirth" name="EstimationTime" class="form-control input-form" placeholder="Tentukan kapan akan diambil" required readonly/>
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </span>
@@ -77,13 +77,19 @@
                                             <div class="one_full">
                                                 <button type="button" class="btn fileUpload" style="width: 100%;padding: 20px 0 20px 0;">
                                                     <i class="fa fa-file"></i> &nbsp; Tambah Lampiran
-                                                    <input type="file" name="image" class="upload" accept="image/*" />    
+                                                    <input type="file" name="userfile[]" class="upload" accept="image/*|.docx|.xlsx|.csv|.pdf" multiple />    
                                                 </button>
+                                                
                                             </div>
+                                            <p class="caption-helper" style="padding-top:10px !important">You can upload <strong>DOC/XLSX/PDF Documents</strong> or <strong>JPG/JPEG/PNG Images</strong> file, with maximum file size 2 MB could upload.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="inputDefault">Nama Dokumen</label>
+                                            <input type="text" name="DocumentName" class="form-control input-form" placeholder="Masukkan Judul Dokumen" autofocus>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label" for="inputDefault">Catatan untuk Merchant</label>
-                                            <textarea id="ProDesc" name="ProDesc" class="form-control" rows="5" placeholder="Berikan catatan singkat tentang pesanan ini .."></textarea>
+                                            <textarea id="ProDesc" name="Note" class="form-control" rows="5" placeholder="Berikan catatan singkat tentang pesanan ini .."></textarea>
                                         </div>
                                         <div style="margin-top:30px;float:right">
                                             <button type="button" id="exit_profile" data-dismiss="modal" class="btn" style="padding:10px 20px">Cancel</button>
@@ -101,7 +107,7 @@
                                     <div class="centeredText ruleterms" style="margin: 60px 0;">
                                         <div class="portlet-title">
                                             <div class="caption caption-red">
-                                                <img src="<?=base_img()."icon/file-1.png"?>" class="icon-form">
+                                                <img src="<?=base_img()."icon/file-1-purple.png"?>" class="icon-form">
                                                 <span class="caption-subject" id="caption-news"></span>
                                             </div>
                                         </div>
@@ -122,7 +128,7 @@
                                 <div class="form-group">
                                     <div class="list-group">
                                         <?php 
-                                            foreach($project as $getPro){
+                                            foreach($merchant as $getMerchant){
                                         ?>
                                             <div class="pro-list">
                                                 <div class="list-group-item">
@@ -130,14 +136,18 @@
                                                         <div class="col-sm-1">
                                                             <div class="checkbox pull-left">
                                                                 <label>
-                                                                    <input type="radio" name="item-merchant" value="<?=$getPro->ProId?>">                                        
+                                                                    <input type="radio" name="MerchantId" value="<?=$getMerchant->MerchantId?>|<?=$getMerchant->MerchantCode?>">                                        
                                                                 </label>   
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-11">
                                                             <div class="pull-left form-control-inline">
-                                                                <a href="" class="list-group-item-heading title"><?=$getPro->ProName?></a>
-                                                                <p class="list-group-item-text sub-title"><?=$getPro->ProDesc?></p>			
+                                                                <a href="" class="list-group-item-heading title">
+                                                                    <span class="label label-success"><?=$getMerchant->MerchantCode?></span>
+                                                                    <?=$getMerchant->MerchantName?>
+                                                                </a>
+                                                                <p class="list-group-item-text sub-title"><?=$getMerchant->MerchantDesc?></p>
+                                                                <p class="list-group-item-text sub-title"><?=$getMerchant->MerchantAddress?></p>			
                                                             </div>  
                                                         </div>
                                                     </div>
@@ -447,24 +457,24 @@
     <!--/End Modal-->    
 
     <!--Delete Modal-->
-     <div class="modal fade" id="delresume">
+    <div class="modal fade" id="delresume">
         <div class="modal-dialog modal-sm">
-          <div class="modal-content">
+            <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Delete Resume</h4>
+                <h4 class="modal-title">Delete Resume</h4>
             </div>
             <div class="modal-body">
                 <br>
-              <p class="modal-title">Are you sure ?</p>
+                <p class="modal-title">Are you sure ?</p>
                 <br>
-              <form method="post" action="resume/delete" id="formDeleteResume">
+                <form method="post" action="resume/delete" id="formDeleteResume">
                 <input type="hidden" name="rsumid" id="RsumId" value="">
                 <input type="hidden" name="rsumimage" id="RsumImage" value="">
                 <button type="submit" class="btn btn-raised btn-success">Sure</button>
                 <button class="btn" data-dismiss="modal">Cancel</button>
-              </form>   
+                </form>   
             </div>
-          </div>
+            </div>
         </div>
-     </div>
+    </div>
     <!--end-->

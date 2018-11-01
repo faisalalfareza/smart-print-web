@@ -166,7 +166,7 @@
                         ?>    
                
                         <a class="btn btn-white">Timeline</a>  
-                        <a href="<?=site_url('index.php/project')?>" class="btn btn-white" style="border:0;">Print Document</a>  
+                        <a href="<?=site_url('index.php/document')?>" class="btn btn-white" style="border:0;">Print Document</a>  
                         <a class="btn btn-white" style="border:0;">My Document History</a>
                         <a href="<?=site_url('index.php/auth/logout')?>" class="btn btn-white" style="border:0;">Logout</a>
 

@@ -125,11 +125,13 @@ btn-outline { border:1px; outline: 1px; color: inherit; background-color:transpa
 
   .btn.btn-success {
     color: #fff;   
-    background-color: #16a085;
+    background-color: #B53471;
+    border-color: #B53471;
   }
 
   .btn.btn-success:hover {
-    background-color: #336E7B;
+    background-color: #6F1E51;
+    border-color: #6F1E51;
   }
 
   sup,sup.menu {
@@ -502,12 +504,12 @@ input[type="text"].input-form:hover,input[type="url"]:hover,input[type="email"].
     border-bottom: 2px solid #ecf0f1;
 }
 input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-webkit-input-placeholder,input[type="email"].input-form::-webkit-input-placeholder,select::-webkit-input-placeholder,textarea.form-control::-webkit-input-placeholder {
-    color: #16a085;
+    color: #B53471;
     font-size: 12px;
     font-weight: 100;
 }
 
-.input-group-addon { outline: 0; border: 0; color: #16a085 }
+.input-group-addon { outline: 0; border: 0; color: #B53471 }
 
 /* Social Login Form */
 .social_login {}
@@ -518,7 +520,7 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
 .social_login .social_box:hover {background-color: #2c3e50; -webkit-transition: all 1s; -moz-transition: all 1s; transition: all 1s; text-decoration:blink;}
 
 .centeredText {text-align: center; font-size: 12px; margin: 15px 0; clear: both; overflow: hidden; color:#999}
-.ruleterms a {color: #16a085; font-weight: 400}
+.ruleterms a {color: #B53471; font-weight: bold}
 
 .action_btns {clear:both; overflow: hidden;}
 .action_btns button {display: block; width: 100%; padding: 10px;}
@@ -539,7 +541,7 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
 
 /* Create Article */
 #formArticle,#formNews {display: none;}
-.add_category { color: #16a085; font-size: 12px; font-weight: bold; margin-top: 10px;  }
+.add_category { color: #B53471; font-size: 12px; font-weight: bold; margin-top: 10px;  }
 .portlet-body.category_add {display: none;}
 .createOption { display: inline-block; padding: 20px; width: 100%; }
 
@@ -669,7 +671,7 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
 .portlet .portlet-title .caption .close.back { float: right; text-align: right; margin-left: 55px; margin-top: -5px; transform: scale(1.5)}
 .caption.caption-red .caption-subject,
 .caption.caption-red i {
-	color: #16a085;
+	color: #B53471;
 	font-weight: 700;
 }
 
@@ -935,8 +937,8 @@ input[type="text"].input-form::-webkit-input-placeholder,input[type="url"]::-web
 
 #header .navbar {
   /*box-shadow: 0 0.15em 0.25em 0 rgba(0,0,0,0.25);*/   
-  /*background-color: #1BA39C;*/
-  background-image: url('../images/background/background-3.jpg');
+  background: linear-gradient(0deg, #000, rgba(99,1,88,1));
+  /* background-image: url('../images/background/background-3.jpg'); */
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
