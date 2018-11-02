@@ -31,8 +31,9 @@
                                                     <ul class="portfolio-filter resume">
                                                         <li class="dropdown-header">Status Project</li>
                                                         <li><a class="active" href="#" data-filter="*">All</a></li>
-                                                        <li><a href="#" data-filter=".finish"><i class="fa fa-check-circle done"></i> &nbsp; Finish</a></li>
-                                                        <li><a href="#" data-filter=".onprogress"><i class="fa fa-spinner onprog"></i> &nbsp; On Progress</a></li>
+                                                        <li><a href="#" data-filter=".finished"><i class="fa fa-check-circle done"></i> &nbsp; Finish</a></li>
+                                                        <li><a href="#" data-filter=".inprogress"><i class="fa fa-check-circle onprog"></i> &nbsp; On Progress</a></li>
+                                                        <li><a href="#" data-filter=".requested"><i class="fa fa-spinner onprog"></i> &nbsp; Requested</a></li>
                                                     </ul><!--/#portfolio-filter-->
                                                 </li>
                                                 <li class="col-sm-6">
@@ -57,30 +58,54 @@
                             
                         <div class="portfolio-items">
                             <?php 
-                                foreach($project as $getPro){
+                                foreach($document as $getDoc){
                             ?>                            
-                            <div class="col-xs-6 col-sm-6 col-md-4 portfolio-item <?=$getPro->ProStatus?>">
+                            <div class="col-xs-6 col-sm-6 col-md-4 portfolio-item <?=$getDoc->Status?>">
                                 <div class="portfolio-wrapper">
                                     <div class="portfolio-single">
                                         <div class="portfolio-thumb tags">
                                             <div class="thumb-caption">
-                                                <h4><?=$getPro->ProName?></h4>
+                                                <h4><?=$getDoc['DocumentName']?></h4>
                                                 
                                                 <?php
-                                                  if($getPro->ProStatus != 'finish'){
-                                                ?>      
-                                                    <div class="check onprogress pull-right"><i class="fa fa-spinner"></i></div>
+                                                  if($getDoc->Status == 'finished') {
+                                                ?>  
+                                                    <div class="check pull-right" style="padding: 5px"><i class="fa fa-check-circle"></i></div>        
+                                                    
                                                 <?php
                                                   }
-                                                  else {
+                                                  else if($getDoc->Status == 'inprogress') {
                                                 ?>     
-                                                    <div class="check pull-right"><i class="fa fa-check-circle"></i></div>
+                                                    <div class="check onprogress pull-right" style="padding: 5px"><i class="fa fa-spinner"></i></div>
                                                 <?php
                                                   }    
+                                                  else {
+                                                ?>
+                                                    <div class="check onprogress pull-right" style="padding: 5px"><i class="fa fa-spinner"></i></div>
+                                                <?php
+                                                  }
                                                 ?>
                                                                                      
-                                                <h6 class="sites name"><?=$getPro->ProSites?></h6>
-                                                <p><?=$getPro->ProDesc?></p>
+                                                <ul>
+                                                    <?php 
+                                                        foreach($getDoc['DocumentDetail'] as $getDocDet){
+                                                    ?>   
+                                                        <li style="margin-left: -20;">
+                                                            <?php 
+                                                                $status = "";
+                                                                if($getDocDet->Status == "finished") $status = "success|F";
+                                                                else if($getDocDet->Status == "inprogress") $status = "warning|I";
+                                                                else if($getDocDet->Status == "requested") $status = "primary|R";
+                                                            ?>
+                                                            <span class="label label-<?=explode('|', $status)[0]?>"><?=explode('|', $status)[1]?></span> 
+                                                            <?=$getDocDet->FileName?>
+                                                        </li>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </ul>
+                                                <h6 class="sites name"><?=$getDoc->UploadedOn?></h6>
+                                                <p><?=$getDoc['Note']?></p>
                                             </div>
                                         </div>
                                         <div class="portfolio-view">   

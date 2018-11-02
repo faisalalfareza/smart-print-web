@@ -4,11 +4,45 @@ class Mdocument extends CI_Model {
     
     function __construct() {
         parent::__construct();
+        $this->load->database();
     }
 
     function getListMerchant() {
         $this->db->order_by('MerchantCode', 'ASC');
         return $this->db->get('ms_merchant')->result();
+    } 
+
+    function getListDocument($userid) {
+        
+        $getDocumentName = "SELECT trdocdet.DocumentName, trdocdet.Note
+                  FROM tr_document trdoc 
+                  JOIN tr_document_detail trdocdet 
+                  ON trdoc.DocumentId = trdocdet.DocumentId
+                  WHERE trdoc.UserId = ? AND trdoc.DocumentId = trdocdet.DocumentId
+                  GROUP BY trdocdet.DocumentName";
+
+        $executeDocumentName = $this->db->query($getDocumentName, array($userid))->result();
+
+        $getJoinDocument = "SELECT * FROM tr_document trdoc 
+                  JOIN tr_document_detail trdocdet 
+                  ON trdoc.DocumentId = trdocdet.DocumentId
+                  WHERE trdoc.UserId = ? AND trdoc.DocumentId = trdocdet.DocumentId";
+        $executeJoinDocument = $this->db->query($getJoinDocument, array($userid))->result();
+
+        foreach($executeDocumentName as $doc) {
+            foreach($executeJoinDocument as $joinDoc) {
+                if ($doc->DocumentName == $joinDoc->DocumentName) {
+                    $docDetail[] = $joinDoc;
+                }
+            }
+            
+            $data[] = array(
+                'DocumentName'   => $doc->DocumentName,
+                'Note'           => $doc->Note,
+                'DocumentDetail' => $docDetail
+            );
+        }
+        return $data;
     } 
 
     function uploadDocDetail($data) {
@@ -94,8 +128,6 @@ class Mdocument extends CI_Model {
         $this->db->order_by('NewsId', 'DESC');
         return $this->db->get('ms_news')->result();
     }     
-
-    
 
     function gems_yId( $id ) {
         return $this->db->get_where('ms_project', array('ProId' => $id))->row();

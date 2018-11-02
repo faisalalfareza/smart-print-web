@@ -4,7 +4,7 @@
     <div class="modal fade" id="createResume" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="uploadDocument" method="post" id="formResume" class="formResume" enctype="multipart/form-data" onsubmit="return false">
+                <form action="document/uploadDocument" method="post" id="formResume" class="formResume" enctype="multipart/form-data" onsubmit="return false">
                     
                 <input type="hidden" name="UserId" value="<?=$UserId?>">    
                     

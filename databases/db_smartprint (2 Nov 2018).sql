@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 01 Nov 2018 pada 22.23
+-- Generation Time: 02 Nov 2018 pada 07.29
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -54,6 +54,13 @@ CREATE TABLE `ms_batch_merchant` (
   `MerchantId` int(20) NOT NULL,
   `MerchantQueueNumber` bigint(100) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `ms_batch_merchant`
+--
+
+INSERT INTO `ms_batch_merchant` (`MerchantId`, `MerchantQueueNumber`) VALUES
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -329,6 +336,16 @@ CREATE TABLE `tr_document` (
   `FinishedOn` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tr_document`
+--
+
+INSERT INTO `tr_document` (`QueueNumber`, `DocumentId`, `MerchantId`, `UserId`, `Status`, `UploadedOn`, `ProcessedOn`, `FinishedOn`) VALUES
+('MSTRO-95-02112018-040400-1', 58, 1, 95, 'requested', 'Friday, 02 Nov 2018 04:04:00', NULL, NULL),
+('MSTRO-95-02112018-040400-2', 59, 1, 95, 'requested', 'Friday, 02 Nov 2018 04:04:00', NULL, NULL),
+('MSTRO-95-02112018-040400-3', 60, 1, 95, 'requested', 'Friday, 02 Nov 2018 04:04:00', NULL, NULL),
+('MSTRO-95-02112018-040401-4', 61, 1, 95, 'requested', 'Friday, 02 Nov 2018 04:04:01', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -340,9 +357,20 @@ CREATE TABLE `tr_document_detail` (
   `DocumentName` varchar(50) NOT NULL,
   `DocumentType` varchar(15) NOT NULL,
   `LinkFileUrl` text NOT NULL,
+  `FileName` text NOT NULL,
   `Note` text,
   `EstimationTime` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tr_document_detail`
+--
+
+INSERT INTO `tr_document_detail` (`DocumentId`, `DocumentName`, `DocumentType`, `LinkFileUrl`, `FileName`, `Note`, `EstimationTime`) VALUES
+(58, 'Makalah Kewirausahaan II', '.pdf', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO95-02112018-040359/94-636-1-PB.pdf', '94-636-1-PB.pdf', 'Barang tidak sesuai pesanan. Saya dikirimkan ukuran yang tidak sesuai deskripsi. Pas saya komplain pihak wakai tidak menerima. Dzolim banget. Mending beli produk yang lokal aja. Produk ini mahal doang. Kualitas pelayanan jelek banget. Not recommended', '16 November 2018'),
+(59, 'Makalah Kewirausahaan II', '.jpg', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO95-02112018-040359/246x0w.jpg', '246x0w.jpg', 'Barang tidak sesuai pesanan. Saya dikirimkan ukuran yang tidak sesuai deskripsi. Pas saya komplain pihak wakai tidak menerima. Dzolim banget. Mending beli produk yang lokal aja. Produk ini mahal doang. Kualitas pelayanan jelek banget. Not recommended', '16 November 2018'),
+(60, 'Makalah Kewirausahaan II', '.xlsx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO95-02112018-040359/2018_Gasal_(kelas_TI-Prof).xlsx', '2018_Gasal_(kelas_TI-Prof).xlsx', 'Barang tidak sesuai pesanan. Saya dikirimkan ukuran yang tidak sesuai deskripsi. Pas saya komplain pihak wakai tidak menerima. Dzolim banget. Mending beli produk yang lokal aja. Produk ini mahal doang. Kualitas pelayanan jelek banget. Not recommended', '16 November 2018'),
+(61, 'Makalah Kewirausahaan II', '.docx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO95-02112018-040359/Print_Setting_Kontrak.docx', 'Print_Setting_Kontrak.docx', 'Barang tidak sesuai pesanan. Saya dikirimkan ukuran yang tidak sesuai deskripsi. Pas saya komplain pihak wakai tidak menerima. Dzolim banget. Mending beli produk yang lokal aja. Produk ini mahal doang. Kualitas pelayanan jelek banget. Not recommended', '16 November 2018');
 
 --
 -- Indexes for dumped tables
@@ -494,7 +522,7 @@ ALTER TABLE `ms_user_role`
 -- AUTO_INCREMENT for table `tr_document_detail`
 --
 ALTER TABLE `tr_document_detail`
-  MODIFY `DocumentId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `DocumentId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --

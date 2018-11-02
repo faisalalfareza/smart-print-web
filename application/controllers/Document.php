@@ -35,6 +35,8 @@ class Document extends CI_Controller {
             // $data['resume']       =  $this->mdocument->getResume();
             $data['project']      =  $this->mdocument->getProject();
             $data['merchant']      =  $this->mdocument->getListMerchant();
+            $data['document']      =  $this->mdocument->getListDocument($userid);
+            print_r(json_encode($data['document']));
             // $data['artikel']      =  $this->mdocument->getArtikel();
             // $data['news']         =  $this->mdocument->getNews();
             $data['role']         =  $this->mdocument->getRole($userid);
@@ -132,6 +134,7 @@ class Document extends CI_Controller {
                         'DocumentName'    =>  $this->input->post('DocumentName'),
                         'DocumentType'    =>  $data['file_ext'],
                         'LinkFileUrl'     =>  $data['full_path'],
+                        'FileName'        =>  $data['file_name'],
                         'Note'            =>  $this->input->post('Note'),
                         'EstimationTime'  =>  $this->input->post('EstimationTime')
                     );
@@ -151,8 +154,6 @@ class Document extends CI_Controller {
                         'UploadedOn'      =>  date("l, d M Y H:i:s")
                     );
                     $this->mdocument->uploadDoc($reqTrDocument);
-
-                    // $this->load->view('upload/upload_success', $data);
                 }
 
             }
@@ -160,7 +161,6 @@ class Document extends CI_Controller {
 
         $this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\">Upload Document \"" .$this->input->post('DocumentName'). "\" Successfully</div>");
         redirect($this->agent->referrer());
-        // redirect('index.php/document/');                 
 	}
     
     public function updateproject() {
