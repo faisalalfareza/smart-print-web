@@ -20,22 +20,25 @@ class Mdocument extends CI_Model {
                   ON trdoc.DocumentId = trdocdet.DocumentId
                   WHERE trdoc.UserId = ? AND trdoc.DocumentId = trdocdet.DocumentId
                   GROUP BY trdocdet.DocumentName";
-
         $executeDocumentName = $this->db->query($getDocumentName, array($userid))->result();
 
         $getJoinDocument = "SELECT * FROM tr_document trdoc 
                   JOIN tr_document_detail trdocdet 
                   ON trdoc.DocumentId = trdocdet.DocumentId
-                  WHERE trdoc.UserId = ? AND trdoc.DocumentId = trdocdet.DocumentId";
+                  WHERE trdoc.UserId = ? 
+                        AND trdoc.DocumentId = trdocdet.DocumentId";
         $executeJoinDocument = $this->db->query($getJoinDocument, array($userid))->result();
 
+        $data = null;
         foreach($executeDocumentName as $doc) {
             foreach($executeJoinDocument as $joinDoc) {
                 if ($doc->DocumentName == $joinDoc->DocumentName) {
+                    // print_r($doc->DocumentName);
                     $docDetail[] = $joinDoc;
                 }
             }
             
+            // print_r(json_encode($docDetail));
             $data[] = array(
                 'DocumentName'   => $doc->DocumentName,
                 'Note'           => $doc->Note,

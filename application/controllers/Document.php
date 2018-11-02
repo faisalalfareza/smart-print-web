@@ -36,7 +36,7 @@ class Document extends CI_Controller {
             $data['project']      =  $this->mdocument->getProject();
             $data['merchant']      =  $this->mdocument->getListMerchant();
             $data['document']      =  $this->mdocument->getListDocument($userid);
-            print_r(json_encode($data['document']));
+            // print_r(json_encode($data['document']));
             // $data['artikel']      =  $this->mdocument->getArtikel();
             // $data['news']         =  $this->mdocument->getNews();
             $data['role']         =  $this->mdocument->getRole($userid);
@@ -86,6 +86,17 @@ class Document extends CI_Controller {
                 mkdir($path, 0755, TRUE);
             }
 
+            $config['upload_path']          = $path;
+            $config['allowed_types']        = 'gif|jpg|jpeg|png|docx|xlsx|csv|pdf';
+            $config['overwrite']            = 1;
+            $config['max_size']             = 2048;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            // Load and initialize upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
             $filesCount = count($_FILES['userfile']['name']);
             for($i = 0; $i < $filesCount; $i++) {
 
@@ -95,17 +106,6 @@ class Document extends CI_Controller {
                 $_FILES['file']['tmp_name']     = $_FILES['userfile']['tmp_name'][$i];
                 $_FILES['file']['error']        = $_FILES['userfile']['error'][$i];
                 $_FILES['file']['size']         = $_FILES['userfile']['size'][$i];
-
-                $config['upload_path']          = $path;
-                $config['allowed_types']        = 'gif|jpg|jpeg|png|docx|xlsx|csv|pdf';
-                $config['overwrite']            = 1;
-                $config['max_size']             = 2048;
-                $config['max_width']            = 1024;
-                $config['max_height']           = 768;
-
-                // Load and initialize upload library
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
 
                 $batch = $this->mdocument->getCurrentBatchMerchant($merchantId);
                     

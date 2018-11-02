@@ -16,12 +16,19 @@
                                             Collection Resume &nbsp; <i class="fa fa-th-large"></i>
                                         </button>
                                     </div>
-                                </div>    
+                                </div>  
+                                
+                                <div class="section-title">
+                                    <div class="container">
+                                        <h2 class="title">Document(s) History</h2>
+                                        <p class="sub-title" style="padding-left:0">Jelajahi daftar terpilih untuk riwayat pendidikan terbaik, kemampuan &amp; pengalaman di sekitar anda, berdasarkan tren</p>
+                                    </div>
+                                </div>
 
                                 <div class="collapse navbar-collapse js-navbar-collapse">
                                     <ul class="nav navbar-nav resume">
                                         <li>
-                                            <a class="menu" href="javascript:void(0)" data-backdrop="false" data-toggle="modal" data-target="#createResume"> Upload New Document </a>                 
+                                            <a class="menu" href="javascript:void(0)" data-backdrop="false" data-toggle="modal" data-target="#createResume">Upload New Document </a>                 
                                         </li>                                        
                                         <li class="dropdown dropdown-large"> 
                                             <a href="#" class="dropdown-toggle menu" data-toggle="dropdown">Filter By</a>
@@ -52,8 +59,8 @@
                                     </ul>
 
                                 </div><!-- /.nav-collapse -->
-                            </nav>                            
-                            
+                            </nav> 
+ 
                     <?=$this->session->flashdata('pesan')?>                             
                             
                         <div class="portfolio-items">
@@ -63,31 +70,33 @@
                             <div class="col-xs-6 col-sm-6 col-md-4 portfolio-item <?=$getDoc->Status?>">
                                 <div class="portfolio-wrapper">
                                     <div class="portfolio-single">
-                                        <div class="portfolio-thumb tags">
+                                        <div class="portfolio-thumb">
                                             <div class="thumb-caption">
                                                 <h4><?=$getDoc['DocumentName']?></h4>
                                                 
                                                 <?php
                                                   if($getDoc->Status == 'finished') {
                                                 ?>  
-                                                    <div class="check pull-right" style="padding: 5px"><i class="fa fa-check-circle"></i></div>        
+                                                    <div class="check pull-right"><i class="fa fa-check-circle"></i></div>        
                                                     
                                                 <?php
                                                   }
                                                   else if($getDoc->Status == 'inprogress') {
                                                 ?>     
-                                                    <div class="check onprogress pull-right" style="padding: 5px"><i class="fa fa-spinner"></i></div>
+                                                    <div class="check onprogress pull-right"><i class="fa fa-spinner"></i></div>
                                                 <?php
                                                   }    
                                                   else {
                                                 ?>
-                                                    <div class="check onprogress pull-right" style="padding: 5px"><i class="fa fa-spinner"></i></div>
+                                                    <div class="check onprogress pull-right"><i class="fa fa-spinner"></i></div>
                                                 <?php
                                                   }
                                                 ?>
                                                                                      
                                                 <ul>
                                                     <?php 
+                                                        $count = 0;
+                                                        $countFinish = 0;
                                                         foreach($getDoc['DocumentDetail'] as $getDocDet){
                                                     ?>   
                                                         <li style="margin-left: -20;">
@@ -98,14 +107,22 @@
                                                                 else if($getDocDet->Status == "requested") $status = "primary|R";
                                                             ?>
                                                             <span class="label label-<?=explode('|', $status)[0]?>"><?=explode('|', $status)[1]?></span> 
-                                                            <?=$getDocDet->FileName?>
+                                                            <a href="<?=$getDocDet->LinkFileUrl?>"><?=$getDocDet->FileName?></a>
                                                         </li>
                                                     <?php
+                                                            $count++;
+                                                            if($getDocDet->Status == "finished") $countFinish++;
+
+                                                            $i = $countFinish / $count;
+                                                            $finishedPresentage = ($i * 100);
                                                         }
                                                     ?>
                                                 </ul>
                                                 <h6 class="sites name"><?=$getDoc->UploadedOn?></h6>
                                                 <p><?=$getDoc['Note']?></p>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-success six-sec-ease-in-out" role="progressbar" data-transition="<?=$finishedPresentage?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div> 
                                             </div>
                                         </div>
                                         <div class="portfolio-view">   
