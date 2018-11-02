@@ -14,11 +14,14 @@ class Mdocument extends CI_Model {
 
     function getListDocument($userid) {
         
-        $getDocumentName = "SELECT trdocdet.DocumentName, trdocdet.Note
+        $getDocumentName = "SELECT trdocdet.DocumentName, trdocdet.Note, msmrc.MerchantName
                   FROM tr_document trdoc 
                   JOIN tr_document_detail trdocdet 
-                  ON trdoc.DocumentId = trdocdet.DocumentId
-                  WHERE trdoc.UserId = ? AND trdoc.DocumentId = trdocdet.DocumentId
+                        ON trdoc.DocumentId = trdocdet.DocumentId
+                  JOIN ms_merchant msmrc
+                        ON trdoc.MerchantId = msmrc.MerchantId
+                  WHERE trdoc.UserId = ? 
+                        AND trdoc.DocumentId = trdocdet.DocumentId
                   GROUP BY trdocdet.DocumentName";
         $executeDocumentName = $this->db->query($getDocumentName, array($userid))->result();
 
@@ -41,6 +44,7 @@ class Mdocument extends CI_Model {
             // print_r(json_encode($docDetail));
             $data[] = array(
                 'DocumentName'   => $doc->DocumentName,
+                'MerchantName'   => $doc->MerchantName,
                 'Note'           => $doc->Note,
                 'DocumentDetail' => $docDetail
             );
