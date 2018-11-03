@@ -7,6 +7,12 @@ class Mdocument extends CI_Model {
         $this->load->database();
     }
 
+    function getRole( $userid ) {
+        $getRole = "SELECT RoleId from ms_user WHERE UserId = ?";
+        $query = $this->db->query($getRole, array($userid));
+        return $query->row();
+    }
+
     // User
 
     function getListMerchant() {
@@ -206,13 +212,7 @@ class Mdocument extends CI_Model {
         $joinRsumConf = "SELECT * from ms_resume WHERE RsumId in (SELECT RsumId FROM ms_resume_project WHERE ProId=? AND AsignStatus=?)";
         $query = $this->db->query($joinRsumConf, array($id,0));
         return $query;
-    }         
-
-    function getRole( $userid ) {
-        $getRole = "SELECT * from ms_role WHERE RoleId in (SELECT RoleId FROM ms_user WHERE UserId=?)";
-        $query = $this->db->query($getRole, array($userid));
-        return $query->row();
-    }     
+    }              
 
     function updateproject( $data ) {
         $rsumid = $this->input->post('item');

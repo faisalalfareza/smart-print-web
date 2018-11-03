@@ -12,10 +12,10 @@ class Mwelcome extends CI_Model {
     }  
 
     function getRole( $userid ) {
-        $getRole = "SELECT * from ms_role WHERE RoleId in (SELECT RoleId FROM ms_user WHERE UserId=?)";
+        $getRole = "SELECT RoleId from ms_user WHERE UserId = ?";
         $query = $this->db->query($getRole, array($userid));
         return $query->row();
-    }  
+    }
 
     function getNews() {
         $this->db->order_by('NewsId', 'DESC');
