@@ -166,11 +166,11 @@
                         ?>    
                
                         <?php 
-                            switch($role->RoleName) {
-                                case "admin":
+                            switch($role->RoleId) {
+                                case "1":
                                 break;
 
-                                case "user":
+                                case "2":
                                     ?>
 
                                     <a class="btn btn-white">Timeline</a>  
@@ -180,7 +180,7 @@
                                     <?php
                                 break;
 
-                                case "merchant":
+                                case "3":
                                     ?>
 
                                     <a href="<?=site_url('index.php/document')?>" class="btn btn-white">Manage Document</a>  
