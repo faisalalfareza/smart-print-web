@@ -3,8 +3,12 @@
         $this->load->view('masterpages/inside/inside-header'); 
     ?>   
     <style>
-        #header {
-            padding: 30px 0 0 0 !important;
+        #header { padding: 30px 0 0 0 !important; }
+        .list-group-item-heading.title { 
+            line-height: 1em !important;
+            font-size: 15px !important;
+            color: #343435 !important;
+            font-weight: 900 !important; 
         }
     </style>  
        
@@ -34,167 +38,179 @@
                     <?=$this->session->flashdata('pesan')?>                                               
                     
                     <div class="tab-content usermanager">
-                            <div role="tabpanel" class="tab-pane active" id="requedted">
-                                <?=form_open('home/projectmanage/activate_group')?>
-                                <div class="list-group">
-                                        <a class="list-group-item">
-                                            <div class="checkbox pull-left">
-                                                <label>
-                                                    <input type="checkbox" type="checkbox" id="allWaiting"> 		
-                                                </label>   
-                                            </div>
-                                            <div class="pull-left form-control-inline">
-                                                <h4 class="list-group-item-heading title">
-                                                    <span class="label label-success checkAll">Check all requested document</span>
-                                                </h4>			
-                                            </div>   
-                                            <div class="clearfix"></div>
-                                        </a>                            
-                                    <?php
-                                        foreach($requested as $getReqDoc) {
-                                    ?>
-                                        <!--Start User Data-->
-                                        <div class="waiting-list">
-                                            <div class="list-group-item">
-                                                <div class="row">
-                                                    <div class="col-sm-1">
-                                                        <div class="checkbox pull-left">
-                                                            <label>
-                                                                <input type="checkbox" class="waiting" name="item[]" value="<?=$getReqDoc->DocumentId?>">
-                                                            </label>   
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-11">
-                                                        <div class="pull-left form-control-inline">
-                                                            <a href="#popup" class="list-group-item-heading title"><?=$getReqDoc->DocumentName?></a>
-                                                            <p class="list-group-item-text sub-title"><?=$getReqDoc->Note?></p>
-                                                        
-                                                            <!--<p class="list-group-item-text sub-title">accept</p>	-->		
-                                                        </div>
-                                                        <div class="pull-right">
-                                                            <span onclick="window.location='<?=site_url('home/projectmanage/activate/'.$getProjectNonActive->ProId)?>';" class="label label-info" class="label label-info">Accept</span>                                
-                                                            <span onclick="window.location='<?=site_url('home/projectmanage/delete/'.$getProjectNonActive->ProId)?>';" class="label label-danger">Delete</span>    
-                                                        </div>  
+                        <div role="tabpanel" class="tab-pane active" id="requested">
+                            <?=form_open('index.php/document/updateStatusDoc_group/inprogress')?>
+                            <div class="list-group">
+                                    <a class="list-group-item">
+                                        <div class="checkbox pull-left">
+                                            <label>
+                                                <input type="checkbox" type="checkbox" id="allWaiting"> 		
+                                            </label>   
+                                        </div>
+                                        <div class="pull-left form-control-inline">
+                                            <h4 class="list-group-item-heading title">
+                                                <span class="label label-success checkAll">Check all requested document</span>
+                                            </h4>			
+                                        </div>   
+                                        <div class="clearfix"></div>
+                                    </a>                            
+                                <?php
+                                    foreach($requested as $getReqDoc) {
+                                ?>
+                                    <!--Start User Data-->
+                                    <div class="requested-list">
+                                        <div class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div class="checkbox pull-left">
+                                                        <label>
+                                                            <input type="checkbox" class="waiting" name="item[]" value="<?=$getReqDoc->DocumentId?>">
+                                                        </label>   
                                                     </div>
                                                 </div>
-                                                <div class="clearfix"></div>
+                                                <div class="col-sm-11">
+                                                    <div class="pull-left form-control-inline">
+                                                        <a href="<?=$getReqDoc->LinkFileUrl?>" class="list-group-item-heading title"><?=$getReqDoc->FileName?></a>
+                                                        <p class="list-group-item-heading title"><?=$getReqDoc->DocumentName?></p>
+                                                        <p class="list-group-item-text sub-title"><?=$getReqDoc->UserEmail?></p>
+                                                        <p class="list-group-item-text"><?=$getReqDoc->Note?></p>
+                                                    
+                                                        <!--<p class="list-group-item-text sub-title">accept</p>	-->		
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <span onclick="window.location='<?=site_url('index.php/document/updateStatusDoc/'.$getReqDoc->DocumentId.'/inprogress')?>';" class="label label-success">Accept</span>                                
+                                                        <span onclick="window.location='<?=site_url('index.php/document/setAsRejectedDoc/'.$getReqDoc->DocumentId)?>';" class="label label-danger">Reject</span>    
+                                                    </div>  
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--End User Data-->
-                                    <?php
-                                        }
-                                    ?>  
-                                    <ul class="pagination pagination-sm mark" id="paging-waiting"></ul>                         
-                                </div>
-                                <button type="submit" class="btn"><i class="fa fa-check-circle-o"></i> &nbsp; Accept</button>
-                                <?=form_close()?>                         
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="processed">
-                                <?=form_open('home/projectmanage/deactivate_group')?>
-                                <div class="list-group">
-                                        <a class="list-group-item">
-                                            <div class="checkbox pull-left">
-                                                <label>
-                                                    <input type="checkbox" type="checkbox" id="allAccepted"> 		
-                                                </label>   
-                                            </div>
-                                            <div class="pull-left form-control-inline">
-                                                <h4 class="list-group-item-heading title">
-                                                    <span class="label label-success checkAll">Check all accepted projects</span>
-                                                </h4>			
-                                            </div>   
                                             <div class="clearfix"></div>
-                                        </a>                            
-                                    <?php
-                                        foreach($active as $getProjectActive){
-                                            $ActiveDesc = strip_tags($getProjectActive->ProDesc);
-                                            if (strlen($ActiveDesc) > 90) {
-                                            // truncate string
-                                            $stringCut = substr($ActiveDesc, 0, 90);
-                                            $ActiveDesc = substr($stringCut, 0, strrpos($stringCut, ' ')).'...'; 
-                                            }
-                                    ?>
-                                        <!--Start User Data-->
-                                        <div class="accepted-list">
-                                            <div class="list-group-item">
-                                                <div class="checkbox pull-left">
-                                                    <label>
-                                                        <input type="checkbox" class="accepted" name="item[]" value="<?=$getProjectActive->ProId?>">		
-                                                    </label>   
-                                                </div>
-                                                <div class="pull-left form-control-inline">
-                                                    <h1 href="#popup" class="list-group-item-heading title"><?=$getProjectActive->ProName?></h1>
-                                                    <p class="list-group-item-text sub-title"><?=$ActiveDesc?></p>			
-                                                </div>
-                                                <div class="pull-right">
-                                                    <span onclick="window.location='<?=site_url('home/projectmanage/deactivate/'.$getProjectActive->ProId)?>';" class="label label-warning">Disscard</span>                       
-                                                    <span onclick="window.location='<?=site_url('home/projectmanage/delete/'.$getProjectActive->ProId)?>';" class="label label-danger">Delete</span>    
-                                                </div>    
-                                                <div class="clearfix"></div>
-                                            </div>
                                         </div>
-                                        <!--End User Data-->
-                                    <?php
-                                        }
-                                    ?> 
-                                    <ul class="pagination pagination-sm mark" id="paging-accepted"></ul>                          
-                                </div>
-                                <button type="submit" class="btn"><i class="fa fa-check-circle-o"></i> &nbsp; Disscard</button>
-                                <?=form_close()?>
+                                    </div>
+                                    <!--End User Data-->
+                                <?php
+                                    }
+                                ?>  
+                                <ul class="pagination pagination-sm mark" id="paging-requested"></ul>                         
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="finished">
-                                <?=form_open('home/projectmanage/deactivate_group')?>
-                                <div class="list-group">
-                                        <a class="list-group-item">
-                                            <div class="checkbox pull-left">
-                                                <label>
-                                                    <input type="checkbox" type="checkbox" id="allAccepted"> 		
-                                                </label>   
+                            
+                            <?php if(count($requested) > 0) { ?>
+                                <button type="submit" class="btn"><i class="fa fa-check-circle-o"></i> &nbsp; Mark as processed document</button>
+                            <?php } ?>
+
+                            <?=form_close()?>                         
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="processed">
+                            <?=form_open('index.php/document/updateStatusDoc_group/finished')?>
+                            <div class="list-group">
+                                    <a class="list-group-item">
+                                        <div class="checkbox pull-left">
+                                            <label>
+                                                <input type="checkbox" type="checkbox" id="allWaiting"> 		
+                                            </label>   
+                                        </div>
+                                        <div class="pull-left form-control-inline">
+                                            <h4 class="list-group-item-heading title">
+                                                <span class="label label-success checkAll">Check all processed document</span>
+                                            </h4>			
+                                        </div>   
+                                        <div class="clearfix"></div>
+                                    </a>                            
+                                <?php
+                                    foreach($processed as $getProcDoc) {
+                                ?>
+                                    <!--Start User Data-->
+                                    <div class="processed-list">
+                                        <div class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div class="checkbox pull-left">
+                                                        <label>
+                                                            <input type="checkbox" class="waiting" name="item[]" value="<?=$getProcDoc->DocumentId?>">
+                                                        </label>   
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-11">
+                                                    <div class="pull-left form-control-inline">
+                                                        <a href="<?=$getProcDoc->LinkFileUrl?>" class="list-group-item-heading title"><?=$getProcDoc->FileName?></a>
+                                                        <p class="list-group-item-heading title"><?=$getProcDoc->DocumentName?></p>
+                                                        <p class="list-group-item-text sub-title"><?=$getProcDoc->UserEmail?></p>
+                                                        <p class="list-group-item-text"><?=$getProcDoc->Note?></p>
+                                                    
+                                                        <!--<p class="list-group-item-text sub-title">accept</p>	-->		
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <span onclick="window.location='<?=site_url('index.php/document/updateStatusDoc/'.$getProcDoc->DocumentId.'/finished')?>';" class="label label-success">Finish</span>                                
+                                                        <span onclick="window.location='<?=site_url('index.php/document/updateStatusDoc/'.$getProcDoc->DocumentId.'/requested')?>';" class="label label-warning">Rollback</span>    
+                                                    </div>  
+                                                </div>
                                             </div>
-                                            <div class="pull-left form-control-inline">
-                                                <h4 class="list-group-item-heading title">
-                                                    <span class="label label-success checkAll">Check all accepted projects</span>
-                                                </h4>			
-                                            </div>   
                                             <div class="clearfix"></div>
-                                        </a>                            
-                                    <?php
-                                        foreach($active as $getProjectActive){
-                                            $ActiveDesc = strip_tags($getProjectActive->ProDesc);
-                                            if (strlen($ActiveDesc) > 90) {
-                                            // truncate string
-                                            $stringCut = substr($ActiveDesc, 0, 90);
-                                            $ActiveDesc = substr($stringCut, 0, strrpos($stringCut, ' ')).'...'; 
-                                            }
-                                    ?>
-                                        <!--Start User Data-->
-                                        <div class="accepted-list">
-                                            <div class="list-group-item">
-                                                <div class="checkbox pull-left">
-                                                    <label>
-                                                        <input type="checkbox" class="accepted" name="item[]" value="<?=$getProjectActive->ProId?>">		
-                                                    </label>   
-                                                </div>
-                                                <div class="pull-left form-control-inline">
-                                                    <h1 href="#popup" class="list-group-item-heading title"><?=$getProjectActive->ProName?></h1>
-                                                    <p class="list-group-item-text sub-title"><?=$ActiveDesc?></p>			
-                                                </div>
-                                                <div class="pull-right">
-                                                    <span onclick="window.location='<?=site_url('home/projectmanage/deactivate/'.$getProjectActive->ProId)?>';" class="label label-warning">Disscard</span>                       
-                                                    <span onclick="window.location='<?=site_url('home/projectmanage/delete/'.$getProjectActive->ProId)?>';" class="label label-danger">Delete</span>    
-                                                </div>    
-                                                <div class="clearfix"></div>
-                                            </div>
                                         </div>
-                                        <!--End User Data-->
-                                    <?php
-                                        }
-                                    ?> 
-                                    <ul class="pagination pagination-sm mark" id="paging-accepted"></ul>                          
-                                </div>
-                                <button type="submit" class="btn"><i class="fa fa-check-circle-o"></i> &nbsp; Disscard</button>
-                                <?=form_close()?>
+                                    </div>
+                                    <!--End User Data-->
+                                <?php
+                                    }
+                                ?>  
+                                <ul class="pagination pagination-sm mark" id="paging-processed"></ul>                         
                             </div>
+                            <button type="submit" class="btn"><i class="fa fa-check-circle-o"></i> &nbsp; Mark as finished document</button>
+                            <?=form_close()?>                         
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="finished">
+                            <?=form_open('home/projectmanage/activate_group')?>
+                            <div class="list-group">
+                                    <a class="list-group-item">
+                                        <div class="checkbox pull-left">
+                                            <label>
+                                                <input type="checkbox" type="checkbox" id="allWaiting"> 		
+                                            </label>   
+                                        </div>
+                                        <div class="pull-left form-control-inline">
+                                            <h4 class="list-group-item-heading title">
+                                                <span class="label label-success checkAll">Check all finished document</span>
+                                            </h4>			
+                                        </div>   
+                                        <div class="clearfix"></div>
+                                    </a>                            
+                                <?php
+                                    foreach($finished as $getFinDoc) {
+                                ?>
+                                    <!--Start User Data-->
+                                    <div class="finished-list">
+                                        <div class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div class="checkbox pull-left">
+                                                        <label>
+                                                            <input type="checkbox" class="waiting" name="item[]" value="<?=$getFinDoc->DocumentId?>">
+                                                        </label>   
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-11">
+                                                    <div class="pull-left form-control-inline">
+                                                        <a href="<?=$getFinDoc->LinkFileUrl?>" class="list-group-item-heading title"><?=$getFinDoc->FileName?></a>
+                                                        <p class="list-group-item-heading title"><?=$getFinDoc->DocumentName?></p>
+                                                        <p class="list-group-item-text sub-title"><?=$getFinDoc->UserEmail?></p>
+                                                        <p class="list-group-item-text"><?=$getFinDoc->Note?></p>
+                                                    
+                                                        <!--<p class="list-group-item-text sub-title">accept</p>	-->		
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <span onclick="window.location='<?=site_url('index.php/document/updateStatusDoc/'.$getFinDoc->DocumentId.'/inprogress')?>';" class="label label-warning">Rollback</span>    
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <!--End User Data-->
+                                <?php
+                                    }
+                                ?>  
+                                <ul class="pagination pagination-sm mark" id="paging-finished"></ul>                         
+                            </div>
+                            <?=form_close()?>                         
+                        </div>
                     </div>                                             
                 </div>
 
@@ -335,10 +351,13 @@
             $('#allAccepted').change(function () {
                 $("input:checkbox.accepted").prop('checked', $(this).prop("checked"));
             });     
-            $('.accepted-list')
-                .pageMe({pagerSelector:'#paging-accepted',showPrevNext:true,hidePageNumbers:false,perPage:3});
-            $('.waiting-list')
-                .pageMe({pagerSelector:'#paging-waiting',showPrevNext:true,hidePageNumbers:false,perPage:3});                            
+            $('.requested-list')
+                .pageMe({pagerSelector:'#paging-requested',showPrevNext:true,hidePageNumbers:false,perPage:3});
+            $('.processed-list')
+                .pageMe({pagerSelector:'#paging-processed',showPrevNext:true,hidePageNumbers:false,perPage:3});                            
+            });
+            $('.finished-list')
+                .pageMe({pagerSelector:'#paging-finished',showPrevNext:true,hidePageNumbers:false,perPage:3});                            
             });
         });
              

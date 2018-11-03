@@ -49,7 +49,7 @@ class Document extends CI_Controller {
                     $data['merchant']      =  $this->mdocument->getListMerchant();
                     $data['document']      =  $this->mdocument->getListDocument($userid);
                     
-                    $data['requested']     =  $this->mdocument->getRequestedDocument($userid);
+                    $data['requested']     =  $this->mdocument->getRequestedDocument();
                     $data['processed']     =  $this->mdocument->getProcessedDocument();
                     $data['finished']      =  $this->mdocument->getFinishedDocument();
 
@@ -178,8 +178,29 @@ class Document extends CI_Controller {
         $this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\">Upload Document \"" .$this->input->post('DocumentName'). "\" Successfully</div>");
         redirect($this->agent->referrer());
 	}
+
+    function setAsRejectedDoc($documentId) {
+        $this->mprojectmanage->activate($ProId);          
+        redirect('home/projectmanage');
+    }
+
+    public function updateStatusInMessage($status) {
+        $message = "";
+        if ($status == "finished") $message = 'Document Completed';
+        else if ($status == "inprogress") $message = 'Document has been Queued'; 
+        else if ($status == "requested") $message = 'Document has been Rollback to Request Document';
+        return $message;
+    }
+    function updateStatusDoc($documentId, $status) {
+        $this->mdocument->updateStatusDoc($documentId, $status, $this->updateStatusInMessage($status));          
+        redirect($this->agent->referrer());
+    }	
+    function updateStatusDoc_group($status) {
+        $this->mdocument->updateStatusDoc_group($status, $this->updateStatusInMessage($status));          
+        redirect($this->agent->referrer());
+    }
     
-    public function updateproject() {
+    function updateproject() {
         $data = array(
             'ProName'             => $this->input->post('ProName'),
             'ProSites'            => $this->input->post('ProSites'),

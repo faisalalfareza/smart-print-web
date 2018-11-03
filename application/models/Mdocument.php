@@ -78,7 +78,7 @@ class Mdocument extends CI_Model {
 
     //   Merchant
 
-    function getRequestedDocument($userid) {
+    function getRequestedDocument() {
         $getReqDocument = "SELECT * FROM tr_document trdoc 
                   JOIN tr_document_detail trdocdet 
                     ON trdoc.DocumentId = trdocdet.DocumentId
@@ -91,15 +91,43 @@ class Mdocument extends CI_Model {
     }
 
     function getProcessedDocument() {
-        $this->db->where('Privilage', 0);
-        $this->db->order_by('ProId', 'DESC');
-        return $this->db->get('ms_project')->result();
+        $getProcDocument = "SELECT * FROM tr_document trdoc 
+                  JOIN tr_document_detail trdocdet 
+                    ON trdoc.DocumentId = trdocdet.DocumentId
+                  JOIN ms_user msu 
+                    ON msu.UserId = trdoc.UserId
+                  WHERE trdoc.DocumentId = trdocdet.DocumentId
+                    AND trdoc.Status = ?";
+        $executeJoinDocument = $this->db->query($getProcDocument, array('inprogress'))->result();
+        return $executeJoinDocument;
     }
 
     function getFinishedDocument() {
-        $this->db->where('Privilage', 0);
-        $this->db->order_by('ProId', 'DESC');
-        return $this->db->get('ms_project')->result();
+        $getFinDocument = "SELECT * FROM tr_document trdoc 
+                  JOIN tr_document_detail trdocdet 
+                    ON trdoc.DocumentId = trdocdet.DocumentId
+                  JOIN ms_user msu 
+                    ON msu.UserId = trdoc.UserId
+                  WHERE trdoc.DocumentId = trdocdet.DocumentId
+                    AND trdoc.Status = ?";
+        $executeJoinDocument = $this->db->query($getFinDocument, array('finished'))->result();
+        return $executeJoinDocument;
+    }
+
+    function updateStatusDoc($documentId, $status, $message) {
+        $this->db->where('DocumentId', $documentId);
+        $this->db->update('tr_document', array('Status' => $status));
+        $this->session->set_flashdata("pesan", "<div class=\"alert alert-success fade in\" id=\"alert\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&#9679;</a>&nbsp; " .$message. " &nbsp;</div>");          
+    }  
+    
+    function updateStatusDoc_group($status, $message) {
+        $items = $this->input->post('item');
+        foreach($items as $item){
+            $this->db->where('DocumentId', $item);
+            if($this->db->update('tr_document', array('Status' => $status))){
+                $this->session->set_flashdata("pesan", "<div class=\"alert alert-success fade in\" id=\"alert\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&#9679;</a>&nbsp; ". count($items) ." ". $message ." &nbsp;</div>");                 
+            }
+        }      
     }
 
     // ------------------------------------------------------

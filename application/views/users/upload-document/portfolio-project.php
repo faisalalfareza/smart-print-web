@@ -115,7 +115,8 @@
                                                 </li>
                                             <?php
                                                     $count++;
-                                                    if($getDocDet->Status == "finished") $countFinish++;
+                                                    if($getDocDet->Status == "finished") $countFinish += 1;
+                                                    if($getDocDet->Status == "inprogress") $countFinish += 0.5;
 
                                                     $i = $countFinish / $count;
                                                     $finishedPresentage = ($i * 100);
