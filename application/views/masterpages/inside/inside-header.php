@@ -73,39 +73,43 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         
-                        <li><a href="<?=site_url('home')?>">Home</a></li>
+                        <li><a href="<?=site_url('index.php/welcome')?>">Home</a></li>
                         <?php
                           if(isset($this->session->userdata('sc_sess')['UserId'])) {
                             $UserEmail = $this->session->userdata('sc_sess')['UserEmail'];
                             $UserId = $this->session->userdata('sc_sess')['UserId'];
-                            
-                            if($role->RoleId == 1){  
                             ?>
-                            <li class="dropdown"><a href="">Admin Manager <i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="<?=site_url('usermanage')?>">User Manager</a></li>
-                                    <li><a href="<?=site_url('projectmanage')?>">Project Manager</a></li>
-                                </ul>
-                            </li> 
-                            <?php } ?>
-                            <li class="dropdown"><a href="<?=site_url('resume')?>">Portfolio <i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="<?=site_url('resume')?>">Curriculum Vitae</a></li>
-                                    <li><a href="<?=site_url('project')?>">Collection Project</a></li>
-                                    <li><hr></li>
-                                    <li><a href="<?=site_url('forum')?>">Forum Discussion</a></li>
-                                    <li><hr></li>
-                                    <li><a href="<?=site_url('artikel')?>">Collection Articles</a></li>
-                                    <li><a href="<?=site_url('news')?>">Latest News</a></li>
-                                </ul>
-                            </li>                     
-                            <li class="dropdown"><a class="btn" href="javascript:void(0)"><?=$UserEmail?> <i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="<?=site_url('history')?>">User History</a></li>
-                                    <li><a href="<?=site_url('index.php/auth/logout')?>">Logout</a></li>
-                                </ul>
-                            </li>                        
-                            <?php
+
+                                <li class="dropdown"><a href="">Document <i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <?php 
+                                            if($role->RoleId == 2) { 
+                                        ?>
+                                        
+                                            <li><a href="<?=site_url('index.php/document')?>">Print Document</a></li>
+                                            <li><a href="<?=site_url('index.php/document')?>">My Document History</a></li>
+                                            <li><a href="<?=site_url('index.php/document')?>">Timeline</a></li>
+                                    
+                                        <?php 
+                                            } 
+                                            else if($role->RoleId == 3) { 
+                                        ?>
+
+                                            <li><a href="<?=site_url('index.php/document')?>">Manage Document</a></li>
+
+                                        <?php
+                                            }
+                                        ?>
+                                    </ul>
+                                </li> 
+                                <li class="dropdown"><a class="btn" href="javascript:void(0)"><?=$UserEmail?> <i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="<?=site_url('index.php/document')?>">Edit Profile</a></li>
+                                        <li><a href="<?=site_url('index.php/auth/logout')?>">Logout</a></li>
+                                    </ul>
+                                </li>    
+
+                        <?php
                           } else {
                             ?>
                             <li><a class="btn openLogin" id="modal_trigger" href="javascript:void(0)">Login</a></li>
