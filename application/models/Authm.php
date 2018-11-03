@@ -52,14 +52,14 @@ class Authm extends CI_Model {
         return $this->db->insert('ms_user', $data);
     }   
 
-    function add_to_userrole() {
-        $userrole = array(
-            'UserId'  => $this->db->insert_id(),            
-            'RoleId'  => '2'
-        );             
-        $this->db->insert('ms_user_role', $userrole);
-        return;
-    } 
+    // function add_to_userrole() {
+    //     $userrole = array(
+    //         'UserId'  => $this->db->insert_id(),            
+    //         'RoleId'  => '2'
+    //     );             
+    //     $this->db->insert('ms_user_role', $userrole);
+    //     return;
+    // } 
 
     function changeActiveState( $id ) {
         $data = array('UserStatus' => 1);

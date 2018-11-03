@@ -57,6 +57,13 @@
                        <input id="RegUser" type="email" name="UserEmail" class="form-control" autofocus>
                      </div>
                      <div class="form-group">
+                        <label class="control-label" for="inputDefault">Role</label>
+                        <select name="UserRole" class="form-control" autofocus>
+                          <option value="User">User</option>
+                          <option value="Merchant">Merchant</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
                         <label class="control-label" for="inputDefault">Password</label>
                         <div class="input-group date form_datetime">
                             <input type="password" id="RegPass" name="UserPass" class="form-control" required data-toggle="popover" title="Password Strength" data-content="Enter Password..." minlength="8">
