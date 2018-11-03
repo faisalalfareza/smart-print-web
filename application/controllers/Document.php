@@ -22,7 +22,7 @@ class Document extends CI_Controller {
 	public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model(array('mdocument', 'mprojectmanage'));
+        $this->load->model(array('mdocument'));
         $this->load->library(array('Bcrypt','user_agent'));
         $this->load->helper(array('url','form','log'));
     }
