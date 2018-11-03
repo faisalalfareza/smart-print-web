@@ -23,7 +23,7 @@ class Welcome extends CI_Controller {
         // var_dump($result[0]->name);
         // $data['news'] =  $this->mwelcome->listNews();
         // $data['artikel'] =  $this->mwelcome->listArtikel();
-		$this->load->view('users/welcome', $data);
+		$this->load->view('welcome', $data);
     }
     
     

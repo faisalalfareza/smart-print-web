@@ -7,6 +7,8 @@ class Mdocument extends CI_Model {
         $this->load->database();
     }
 
+    // User
+
     function getListMerchant() {
         $this->db->order_by('MerchantCode', 'ASC');
         return $this->db->get('ms_merchant')->result();
@@ -72,7 +74,33 @@ class Mdocument extends CI_Model {
     function updateBatchMerchant($merchantId, $queueNumber) {
         $this->db->where('MerchantId', $merchantId);
         $this->db->update('ms_batch_merchant', array('MerchantQueueNumber'=>$queueNumber)); 
-    }    
+    }  
+
+    //   Merchant
+
+    function getRequestedDocument($userid) {
+        $getReqDocument = "SELECT * FROM tr_document trdoc 
+                  JOIN tr_document_detail trdocdet 
+                    ON trdoc.DocumentId = trdocdet.DocumentId
+                  JOIN ms_user msu 
+                    ON msu.UserId = trdoc.UserId
+                  WHERE trdoc.DocumentId = trdocdet.DocumentId
+                    AND trdoc.Status = ?";
+        $executeJoinDocument = $this->db->query($getReqDocument, array('requested'))->result();
+        return $executeJoinDocument;
+    }
+
+    function getProcessedDocument() {
+        $this->db->where('Privilage', 0);
+        $this->db->order_by('ProId', 'DESC');
+        return $this->db->get('ms_project')->result();
+    }
+
+    function getFinishedDocument() {
+        $this->db->where('Privilage', 0);
+        $this->db->order_by('ProId', 'DESC');
+        return $this->db->get('ms_project')->result();
+    }
 
     // ------------------------------------------------------
 

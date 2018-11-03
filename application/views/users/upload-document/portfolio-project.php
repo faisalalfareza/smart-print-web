@@ -2,178 +2,181 @@
         $UserId = $this->session->userdata('sc_sess')['UserId']; 
         $this->load->view('masterpages/inside/inside-header'); 
     ?>   
+    <style>
+        #header {
+            padding: 30px 0 30px 0 !important;
+        }
+    </style>
 
-    <section id="projects">
+    <section id="document">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-info navbar-static resume">
-                        <div class="col-sm-12">
-                            <div class="navbar-header resume">
-                                <button class="btn btn-submit navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
-                                    Collection Resume &nbsp; <i class="fa fa-th-large"></i>
-                                </button>
-                            </div>
-                        </div>  
-                        
-                        <div class="section-title">
-                            <div class="container">
-                                <h2 class="title">Document(s) History</h2>
-                                <p class="sub-title" style="padding-left:0">Jelajahi daftar terpilih untuk riwayat pendidikan terbaik, kemampuan &amp; pengalaman di sekitar anda, berdasarkan tren</p>
-                            </div>
-                        </div>
+            
+            <nav class="navbar navbar-info navbar-static resume">
+                <div class="col-sm-12">
+                    <div class="navbar-header resume">
+                        <button class="btn btn-submit navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+                            Collection Resume &nbsp; <i class="fa fa-th-large"></i>
+                        </button>
+                    </div>
+                </div>  
+                
+                <div class="section-title">
+                    <div class="container">
+                        <h2 class="title">Document(s) History</h2>
+                        <p class="sub-title" style="padding-left:0">Jelajahi daftar terpilih untuk riwayat pendidikan terbaik, kemampuan &amp; pengalaman di sekitar anda, berdasarkan tren</p>
+                    </div>
+                </div>
 
-                        <div class="collapse navbar-collapse js-navbar-collapse">
-                            <ul class="nav navbar-nav resume">
-                                <li>
-                                    <a class="menu" href="javascript:void(0)" data-backdrop="false" data-toggle="modal" data-target="#createResume">Upload New Document </a>                 
-                                </li>                                        
-                                <li class="dropdown dropdown-large"> 
-                                    <a href="#" class="dropdown-toggle menu" data-toggle="dropdown">Filter By</a>
+                <div class="collapse navbar-collapse js-navbar-collapse">
+                    <ul class="nav navbar-nav resume">
+                        <li>
+                            <a class="menu" href="javascript:void(0)" data-backdrop="false" data-toggle="modal" data-target="#createResume">Upload New Document </a>                 
+                        </li>                                        
+                        <li class="dropdown dropdown-large"> 
+                            <a href="#" class="dropdown-toggle menu" data-toggle="dropdown">Filter By</a>
 
-                                    <ul class="dropdown-menu dropdown-menu-large row">
-                                        <li class="col-sm-6">
-                                            <ul class="portfolio-filter resume">
-                                                <li class="dropdown-header">Status Project</li>
-                                                <li><a class="active" href="#" data-filter="*">All</a></li>
-                                                <li><a href="#" data-filter=".finished"><i class="fa fa-check-circle done"></i> &nbsp; Finish</a></li>
-                                                <li><a href="#" data-filter=".inprogress"><i class="fa fa-check-circle onprog"></i> &nbsp; On Progress</a></li>
-                                                <li><a href="#" data-filter=".requested"><i class="fa fa-spinner onprog"></i> &nbsp; Requested</a></li>
-                                            </ul><!--/#portfolio-filter-->
-                                        </li>
-                                        <li class="col-sm-6">
-                                            <ul>
-                                                <li class="dropdown-header">Position</li>
-                                                <li><a class="asc" href="javascript:void(0);">Ascending</a></li>
-                                                <li><a class="desc" href="javascript:void(0);">Descending</a></li>
-                                                <li class="divider"></li> 
-                                                <li class="dropdown-header">Alphabetical</li>
-                                                <li><a class="alph" href="javascript:void(0);">In alphabetical order</a></li>  
-                                            </ul>
-                                        </li>
+                            <ul class="dropdown-menu dropdown-menu-large row">
+                                <li class="col-sm-6">
+                                    <ul class="portfolio-filter resume">
+                                        <li class="dropdown-header">Status Project</li>
+                                        <li><a class="active" href="#" data-filter="*">All</a></li>
+                                        <li><a href="#" data-filter=".finished"><i class="fa fa-check-circle done"></i> &nbsp; Finish</a></li>
+                                        <li><a href="#" data-filter=".inprogress"><i class="fa fa-check-circle onprog"></i> &nbsp; On Progress</a></li>
+                                        <li><a href="#" data-filter=".requested"><i class="fa fa-spinner onprog"></i> &nbsp; Requested</a></li>
+                                    </ul><!--/#portfolio-filter-->
+                                </li>
+                                <li class="col-sm-6">
+                                    <ul>
+                                        <li class="dropdown-header">Position</li>
+                                        <li><a class="asc" href="javascript:void(0);">Ascending</a></li>
+                                        <li><a class="desc" href="javascript:void(0);">Descending</a></li>
+                                        <li class="divider"></li> 
+                                        <li class="dropdown-header">Alphabetical</li>
+                                        <li><a class="alph" href="javascript:void(0);">In alphabetical order</a></li>  
                                     </ul>
-
                                 </li>
                             </ul>
 
-                        </div><!-- /.nav-collapse -->
-                    </nav> 
+                        </li>
+                    </ul>
 
-                    <?=$this->session->flashdata('pesan')?>                             
-                    
-                    <div class="portfolio-items">
-                        <?php 
-                            foreach($document as $getDoc) {
-                        ?>                            
-                        <div class="col-xs-6 col-sm-6 col-md-3 portfolio-item <?=$getDoc->Status?>">
-                            <div class="portfolio-wrapper">
-                                <div class="portfolio-single">
-                                    <div class="portfolio-thumb">
-                                        <div class="thumb-caption">
-                                            <h4><?=$getDoc['DocumentName']?></h4>
-                                            
-                                            <?php
-                                            if($getDoc->Status == 'finished') {
-                                            ?>  
-                                                <div class="check pull-right"><i class="fa fa-check-circle"></i></div>        
-                                                
-                                            <?php
-                                            }
-                                            else if($getDoc->Status == 'inprogress') {
-                                            ?>     
-                                                <div class="check onprogress pull-right"><i class="fa fa-spinner"></i></div>
-                                            <?php
-                                            }    
-                                            else {
-                                            ?>
-                                                <div class="check onprogress pull-right"><i class="fa fa-spinner"></i></div>
-                                            <?php
-                                            }
-                                            ?>
+                </div><!-- /.nav-collapse -->
+            </nav> 
 
-                                            <h6 class="sites name"><i class="fa fa-location fa-lg"></i> <?=$getDoc['MerchantName']?></h6>
-                                                                                
-                                            <ul>
-                                                <?php 
-                                                    $count = 0;
-                                                    $countFinish = 0;
-                                                    foreach($getDoc['DocumentDetail'] as $getDocDet){
-                                                ?>   
-                                                    <li class="ellipsis" style="margin-left: -25px;">
-                                                        <?php 
-                                                            $status = "";
-                                                            if($getDocDet->Status == "finished") $status = "success|F";
-                                                            else if($getDocDet->Status == "inprogress") $status = "warning|I";
-                                                            else if($getDocDet->Status == "requested") $status = "primary|R";
-                                                        ?>
-                                                        <span class="label label-<?=explode('|', $status)[0]?>"><?=explode('|', $status)[1]?></span> 
-                                                        <a href="<?=$getDocDet->LinkFileUrl?>"><?=$getDocDet->FileName?></a>
-                                                    </li>
-                                                <?php
-                                                        $count++;
-                                                        if($getDocDet->Status == "finished") $countFinish++;
+            <?=$this->session->flashdata('pesan')?>                             
+            
+            <div class="portfolio-items">
+                <?php 
+                    foreach($document as $getDoc) {
+                ?>                            
+                    <div class="col-xs-6 col-sm-6 col-md-3 portfolio-item <?=$getDoc->Status?>">
+                        <div class="portfolio-wrapper">
+                            <div class="portfolio-single">
+                                <div class="portfolio-thumb">
+                                    <div class="thumb-caption">
+                                        <h4><?=$getDoc['DocumentName']?></h4>
+                                        
+                                        <?php
+                                        if($getDoc->Status == 'finished') {
+                                        ?>  
+                                            <div class="check pull-right"><i class="fa fa-check-circle"></i></div>        
+                                            
+                                        <?php
+                                        }
+                                        else if($getDoc->Status == 'inprogress') {
+                                        ?>     
+                                            <div class="check onprogress pull-right"><i class="fa fa-spinner"></i></div>
+                                        <?php
+                                        }    
+                                        else {
+                                        ?>
+                                            <div class="check onprogress pull-right"><i class="fa fa-spinner"></i></div>
+                                        <?php
+                                        }
+                                        ?>
 
-                                                        $i = $countFinish / $count;
-                                                        $finishedPresentage = ($i * 100);
-                                                    }
-                                                ?>
-                                            </ul>
-                                            
-                                            <p><?=$getDoc['Note']?></p>
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-success six-sec-ease-in-out" role="progressbar" data-transition="<?=$finishedPresentage?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                    <div class="portfolio-view">   
-                                        <ul class="nav nav-pills">
+                                        <h6 class="sites name"><i class="fa fa-location fa-lg"></i> <?=$getDoc['MerchantName']?></h6>
+                                                                            
+                                        <ul>
+                                            <?php 
+                                                $count = 0;
+                                                $countFinish = 0;
+                                                foreach($getDoc['DocumentDetail'] as $getDocDet){
+                                            ?>   
+                                                <li class="ellipsis" style="margin-left: -25px;">
+                                                    <?php 
+                                                        $status = "";
+                                                        if($getDocDet->Status == "finished") $status = "success|F";
+                                                        else if($getDocDet->Status == "inprogress") $status = "warning|I";
+                                                        else if($getDocDet->Status == "requested") $status = "primary|R";
+                                                    ?>
+                                                    <span class="label label-<?=explode('|', $status)[0]?>"><?=explode('|', $status)[1]?></span> 
+                                                    <a href="<?=$getDocDet->LinkFileUrl?>"><?=$getDocDet->FileName?></a>
+                                                </li>
                                             <?php
-                                            if($role->RoleId == 1) {
-                                            ?>
-                                            <li><a href="<?=site_url('home/project/projectDetails/'.$this->encrypt->encode($getPro->ProId))?>">
-                                                <i class="fa fa-link"></i></a>
-                                            </li>   
-                                            
-                                            <li>
-                                                <a href="javascript:void(0)" class="updateProject" data-backdrop="false" data-toggle="modal" data-id="<?=$getPro->ProId?>" data-name="<?=$getPro->ProName?>" data-sites="<?=$getPro->ProSites?>"  data-desc="<?=$getPro->ProDesc?>" data-status="<?=$getPro->ProStatus?>" data-target="#updateProject" >
-                                                <i class="fa fa-edit"></i></a>
-                                            </li>
-                                            
-                                            <li><a href="<?=site_url('home/project/delete/'.$getPro->ProId)?>" class="delete">
-                                                <i class="fa fa-trash-o"></i></a>
-                                            </li> 
-                                            <?php
-                                            } else {
-                                            ?>
-                                            <li><a href="<?=site_url('home/project/projectDetails/'.$this->encrypt->encode($getPro->ProId))?>">
-                                                <i class="fa fa-link"></i></a>
-                                            </li>                
-                                            <?php
-                                                if($getPro->CreatedBy == $UserId){
-                                            ?>
-                                            <li>
-                                                <a href="javascript:void(0)" class="edit updateProject" data-backdrop="false" data-toggle="modal" data-id="<?=$getPro->ProId?>" data-name="<?=$getPro->ProName?>" data-sites="<?=$getPro->ProSites?>" data-desc="<?=$getPro->ProDesc?>" data-status="<?=$getPro->ProStatus?>" data-target="#updateProject" >
-                                                <i class="fa fa-edit"></i></a>
-                                            </li>                                                
-                                            <li><a href="<?=site_url('home/project/delete/'.$this->encrypt->encode($getPro->ProId))?>" class="delete">
-                                                <i class="fa fa-trash-o"></i></a>
-                                            </li>                                                             
-                                            <?php
+                                                    $count++;
+                                                    if($getDocDet->Status == "finished") $countFinish++;
+
+                                                    $i = $countFinish / $count;
+                                                    $finishedPresentage = ($i * 100);
                                                 }
-                                            }
-                                            ?>                                                
-                                        </ul> 
+                                            ?>
+                                        </ul>
+                                        
+                                        <p><?=$getDoc['Note']?></p>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success six-sec-ease-in-out" role="progressbar" data-transition="<?=$finishedPresentage?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div> 
                                     </div>
                                 </div>
-                                <div class="portfolio-info"></div>
+                                <div class="portfolio-view">   
+                                    <ul class="nav nav-pills">
+                                        <?php
+                                        if($role->RoleId == 1) {
+                                        ?>
+                                        <li><a href="<?=site_url('home/document/projectDetails/'.$this->encrypt->encode($getPro->ProId))?>">
+                                            <i class="fa fa-link"></i></a>
+                                        </li>   
+                                        
+                                        <li>
+                                            <a href="javascript:void(0)" class="updateProject" data-backdrop="false" data-toggle="modal" data-id="<?=$getPro->ProId?>" data-name="<?=$getPro->ProName?>" data-sites="<?=$getPro->ProSites?>"  data-desc="<?=$getPro->ProDesc?>" data-status="<?=$getPro->ProStatus?>" data-target="#updateProject" >
+                                            <i class="fa fa-edit"></i></a>
+                                        </li>
+                                        
+                                        <li><a href="<?=site_url('home/document/delete/'.$getPro->ProId)?>" class="delete">
+                                            <i class="fa fa-trash-o"></i></a>
+                                        </li> 
+                                        <?php
+                                        } else {
+                                        ?>
+                                        <li><a href="<?=site_url('home/project/projectDetails/'.$this->encrypt->encode($getPro->ProId))?>">
+                                            <i class="fa fa-link"></i></a>
+                                        </li>                
+                                        <?php
+                                            if($getPro->CreatedBy == $UserId){
+                                        ?>
+                                        <li>
+                                            <a href="javascript:void(0)" class="edit updateProject" data-backdrop="false" data-toggle="modal" data-id="<?=$getPro->ProId?>" data-name="<?=$getPro->ProName?>" data-sites="<?=$getPro->ProSites?>" data-desc="<?=$getPro->ProDesc?>" data-status="<?=$getPro->ProStatus?>" data-target="#updateProject" >
+                                            <i class="fa fa-edit"></i></a>
+                                        </li>                                                
+                                        <li><a href="<?=site_url('home/document/delete/'.$this->encrypt->encode($getPro->ProId))?>" class="delete">
+                                            <i class="fa fa-trash-o"></i></a>
+                                        </li>                                                             
+                                        <?php
+                                            }
+                                        }
+                                        ?>                                                
+                                    </ul> 
+                                </div>
                             </div>
+                            <div class="portfolio-info"></div>
                         </div>
-                        <?php
-                            }
-                        ?>                              
                     </div>
-                </div>    
+                <?php
+                    }
+                ?>                              
             </div>
+                
         </div>
     </section>
     
@@ -187,7 +190,7 @@
     <!-- End Custom Javascript -->
         <script type="text/javascript">
             var $ = jQuery.noConflict(); 
-            $.fn.pageMe = function(opts){
+            $.fn.pageMe = function(opts) {
                 var $this = this,
                     defaults = {
                         perPage: 2,
@@ -301,8 +304,8 @@
                 $('.list-add').pageMe({pagerSelector:'#paging-add',showPrevNext:true,hidePageNumbers:false,perPage:2});
                 $('.list-update').pageMe({pagerSelector:'#paging-update',showPrevNext:true,hidePageNumbers:false,perPage:2});
               });
-          });           
-            
+          });   
+         
           //update-project
           $(".updateProject").click(function(){
             var ProId = $(this).attr("data-id");

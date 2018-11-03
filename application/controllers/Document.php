@@ -22,7 +22,7 @@ class Document extends CI_Controller {
 	public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model('mdocument');
+        $this->load->model(array('mdocument', 'mprojectmanage'));
         $this->load->library(array('Bcrypt','user_agent'));
         $this->load->helper(array('url','form','log'));
     }
@@ -31,16 +31,32 @@ class Document extends CI_Controller {
 	{
         if(isset($this->session->userdata('sc_sess')['UserId'])) {
             $userid = $this->session->userdata('sc_sess')['UserId'];
-            $data['title']        =  "Print Document(s)";	
-            // $data['resume']       =  $this->mdocument->getResume();
-            $data['project']      =  $this->mdocument->getProject();
-            $data['merchant']      =  $this->mdocument->getListMerchant();
-            $data['document']      =  $this->mdocument->getListDocument($userid);
-            // print_r(json_encode($data['document']));
-            // $data['artikel']      =  $this->mdocument->getArtikel();
-            // $data['news']         =  $this->mdocument->getNews();
             $data['role']         =  $this->mdocument->getRole($userid);
-            $this->load->view('users/upload-document/portfolio-project', $data);
+
+            switch($data['role']->RoleName) {
+                case "admin":
+                break;
+
+                case "user":
+                    $data['title']        =  "Print Document(s)";	
+                    $data['merchant']      =  $this->mdocument->getListMerchant();
+                    $data['document']      =  $this->mdocument->getListDocument($userid);
+                    $this->load->view('users/upload-document/portfolio-project', $data);
+                break;
+
+                case "merchant":
+                    $data['title']         =  "Manage Document(s)";	
+                    $data['merchant']      =  $this->mdocument->getListMerchant();
+                    $data['document']      =  $this->mdocument->getListDocument($userid);
+                    
+                    $data['requested']     =  $this->mdocument->getRequestedDocument($userid);
+                    $data['processed']     =  $this->mdocument->getProcessedDocument();
+                    $data['finished']      =  $this->mdocument->getFinishedDocument();
+
+                    $this->load->view('merchant/manage-document/manage-document', $data);
+                break;
+            }
+            
         }
         else {
             $this->session->set_flashdata("regMsg", "<div class=\"alert alert-danger fade in\" id=\"alert\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&#9679;</a>&nbsp; Can't access. Please login &nbsp;</div>");              

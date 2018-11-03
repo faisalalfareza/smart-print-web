@@ -165,9 +165,30 @@
                         $Remember = $this->session->userdata('sc_sess')['Remember'];  
                         ?>    
                
-                        <a class="btn btn-white">Timeline</a>  
-                        <a href="<?=site_url('index.php/document')?>" class="btn btn-white" style="border:0;">Print Document</a>  
-                        <a class="btn btn-white" style="border:0;">My Document History</a>
+                        <?php 
+                            switch($role->RoleName) {
+                                case "admin":
+                                break;
+
+                                case "user":
+                                    ?>
+
+                                    <a class="btn btn-white">Timeline</a>  
+                                    <a href="<?=site_url('index.php/document')?>" class="btn btn-white" style="border:0;">Print Document</a>  
+                                    <a class="btn btn-white" style="border:0;">My Document History</a>
+                                    
+                                    <?php
+                                break;
+
+                                case "merchant":
+                                    ?>
+
+                                    <a href="<?=site_url('index.php/document')?>" class="btn btn-white">Manage Document</a>  
+
+                                    <?php
+                                break;
+                            }
+                        ?>
                         <a href="<?=site_url('index.php/auth/logout')?>" class="btn btn-white" style="border:0;">Logout</a>
 
                         <?php
