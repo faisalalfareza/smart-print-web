@@ -33,18 +33,18 @@ class Document extends CI_Controller {
             $userid = $this->session->userdata('sc_sess')['UserId'];
             $data['role']         =  $this->mdocument->getRole($userid);
 
-            switch($data['role']->RoleName) {
-                case "admin":
+            switch($data['role']->RoleId) {
+                case "1":
                 break;
 
-                case "user":
+                case "2":
                     $data['title']        =  "Print Document(s)";	
                     $data['merchant']      =  $this->mdocument->getListMerchant();
                     $data['document']      =  $this->mdocument->getListDocument($userid);
                     $this->load->view('users/upload-document/portfolio-project', $data);
                 break;
 
-                case "merchant":
+                case "3":
                     $data['title']         =  "Manage Document(s)";	
                     $data['merchant']      =  $this->mdocument->getListMerchant();
                     $data['document']      =  $this->mdocument->getListDocument($userid);

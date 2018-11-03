@@ -209,7 +209,7 @@ class Mdocument extends CI_Model {
     }         
 
     function getRole( $userid ) {
-        $getRole = "SELECT * from ms_role WHERE RoleId in (SELECT RoleId FROM ms_user_role WHERE UserId=?)";
+        $getRole = "SELECT * from ms_role WHERE RoleId in (SELECT RoleId FROM ms_user WHERE UserId=?)";
         $query = $this->db->query($getRole, array($userid));
         return $query->row();
     }     
