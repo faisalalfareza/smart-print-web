@@ -1,7 +1,27 @@
-      <!-- Footer -->
+<!-- Footer -->
       <footer class="main-footer">
          <div class="container">
             <div class="row">
+               <div class="col-md-4">
+                  <div class="widget widget_links">
+                     <h5 class="widget-title">Contact Details</h5>
+                     <ul>
+                        <li><a href="">Jl. Tidar No.100 Malang</a></li>
+                        <li><a href="">081234567890</a></li>
+                        <li><a href="">smartprinting@gmail.com</a></li>
+                     </ul>
+                  </div>
+               </div> 
+                <div class="col-md-4">
+                  <div class="widget widget_links">
+                     <h5 class="widget-title">Our Marketing Team</h5>
+                     <ul>
+                        <li><a href="">Faisal  : 0838-3441-5004 (WA Available)</a></li>
+                        <li><a href="">Fanani : 0857-4813-2710 (WA Available)</a></li>
+                        <li><a href="">Anisa : 0858-5066-6927 (WA Available)</a></li>
+                     </ul>
+                  </div>
+               </div>
                <div class="col-md-4">
                   <div class="widget widget_links">
                      <h5 class="widget-title">Pelanggan Terkait</h5>
@@ -25,7 +45,7 @@
                         <li><a href="">Car Free Day Ijen Malang</a></li>
                      </ul>
                   </div>
-               </div>              
+               </div>                 
 
                <div class="col-md-4">
                   <div class="widget widget_links">
@@ -48,17 +68,7 @@
 
                      </ul>
                   </div>
-               </div>              
-
-               <div class="col-md-4">
-                  <div class="widget widget_links">
-                     <h5 class="widget-title">Hubungi Kami</h5>
-                     <ul>
-                        <li><a href="">CustomerService@btbgroup.co.id</a></li>
-                        <li><a href="">083834415004</a></li>
-                     </ul>
-                  </div>
-               </div>               
+               </div>                            
             </div>
          </div>
       </footer>    
@@ -78,4 +88,4 @@
       <script type="text/javascript" src="<?=base_js()."material.min.js"?>"></script>
       <script type="text/javascript" src="<?=base_js()."ripples.min.js"?>"></script>
       <script type="text/javascript" src="<?=base_js()."snackbar.min.js"?>"></script>        
-      <script type="text/javascript" src="<?=base_js()."jquery-ui.min.js"?>" ></script>      
+      <script type="text/javascript" src="<?=base_js()."jquery-ui.min.js"?>" ></script>
