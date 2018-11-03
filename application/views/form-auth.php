@@ -58,7 +58,7 @@
                      </div>
                      <div class="form-group">
                         <label class="control-label" for="inputDefault">Role</label>
-                        <select name="UserRole" class="form-control" autofocus>
+                        <select name="UserRole" class="form-control">
                           <option value="User">User</option>
                           <option value="Merchant">Merchant</option>
                         </select>
