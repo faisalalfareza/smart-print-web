@@ -40,21 +40,26 @@ class Mdocument extends CI_Model {
                         AND trdoc.DocumentId = trdocdet.DocumentId";
         $executeJoinDocument = $this->db->query($getJoinDocument, array($userid))->result();
 
-        $data = null;
+        $data = null; 
         foreach($executeDocumentName as $doc) {
             foreach($executeJoinDocument as $joinDoc) {
                 if ($doc->DocumentName == $joinDoc->DocumentName) {
-                    // print_r($doc->DocumentName);
                     $docDetail[] = $joinDoc;
+                    $docSatus[] = $joinDoc->Status;
                 }
             }
-            
-            // print_r(json_encode($docDetail));
+
+            $status = null;
+            if (in_array("inprogress", $docSatus)) $status = "inprogress";
+            if ( (in_array("requested", $docSatus)) && (!in_array("inprogress", $docSatus)) && (!in_array("finished", $docSatus)) ) $status = "requested";
+            if ( (in_array("finished", $docSatus)) && (!in_array("inprogress", $docSatus)) && (!in_array("requested", $docSatus)) ) $status = "finished";
+
             $data[] = array(
-                'DocumentName'   => $doc->DocumentName,
-                'MerchantName'   => $doc->MerchantName,
-                'Note'           => $doc->Note,
-                'DocumentDetail' => $docDetail
+                'DocumentName'      => $doc->DocumentName,
+                'MerchantName'      => $doc->MerchantName,
+                'AllDocumentStatus' => $status,
+                'Note'              => $doc->Note,
+                'DocumentDetail'    => $docDetail
             );
         }
         return $data;

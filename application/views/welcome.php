@@ -322,7 +322,7 @@
         </div>
       </div>   
        
-      <?php $this->load->view('users/modals/form-auth'); ?>
+      <?php $this->load->view('form-auth'); ?>
       <?php $this->load->view('masterpages/foot'); ?> 
        
         <!-- Custom Javascript -->
@@ -333,6 +333,7 @@
           $(document).ready(function () {    
               $(function(){
                 $.material.init();
+                $(".form-group select").dropdown();
                 $('.modal-dialog').draggable(); 
                 $('input[data-toggle="popover"]').popover({
                     placement: 'top', trigger: 'focus'

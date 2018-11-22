@@ -69,7 +69,7 @@
                 <?php 
                     foreach($document as $getDoc) {
                 ?>                            
-                    <div class="col-xs-6 col-sm-6 col-md-3 portfolio-item <?=$getDoc->Status?>">
+                    <div class="col-xs-6 col-sm-6 col-md-3 portfolio-item <?=$getDoc['AllDocumentStatus']?>">
                         <div class="portfolio-wrapper">
                             <div class="portfolio-single">
                                 <div class="portfolio-thumb">
@@ -77,20 +77,20 @@
                                         <h4><?=$getDoc['DocumentName']?></h4>
                                         
                                         <?php
-                                        if($getDoc->Status == 'finished') {
+                                        if($getDoc['AllDocumentStatus'] == 'finished') {
                                         ?>  
                                             <div class="check pull-right"><i class="fa fa-check-circle"></i></div>        
                                             
                                         <?php
                                         }
-                                        else if($getDoc->Status == 'inprogress') {
+                                        else if($getDoc['AllDocumentStatus'] == 'inprogress') {
                                         ?>     
-                                            <div class="check onprogress pull-right"><i class="fa fa-spinner"></i></div>
+                                            <div class="check onprogress pull-right" style="background-color:#f1c40f !important"><i class="fa fa-check-circle"></i></div>
                                         <?php
                                         }    
                                         else {
                                         ?>
-                                            <div class="check onprogress pull-right"><i class="fa fa-spinner"></i></div>
+                                            <div class="check onprogress pull-right" style="background-color:#f1c40f !important"><i class="fa fa-spinner"></i></div>
                                         <?php
                                         }
                                         ?>
