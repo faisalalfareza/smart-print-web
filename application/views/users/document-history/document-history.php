@@ -22,16 +22,13 @@
                 
                 <div class="section-title">
                     <div class="container">
-                        <h2 class="title">Print Document(s)</h2>
+                        <h2 class="title">Document(s) History</h2>
                         <p class="sub-title" style="padding-left:0">Jelajahi daftar terpilih untuk riwayat pendidikan terbaik, kemampuan &amp; pengalaman di sekitar anda, berdasarkan tren</p>
                     </div>
                 </div>
 
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul class="nav navbar-nav resume">
-                        <li>
-                            <a class="menu" href="javascript:void(0)" data-backdrop="false" data-toggle="modal" data-target="#createResume">Upload New Document </a>                 
-                        </li>                                        
                         <li class="dropdown dropdown-large"> 
                             <a href="#" class="dropdown-toggle menu" data-toggle="dropdown">Filter By</a>
 

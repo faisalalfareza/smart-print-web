@@ -64,6 +64,30 @@ class Document extends CI_Controller {
         }
     } 
 
+    public function dHistory()
+    {
+        if(isset($this->session->userdata('sc_sess')['UserId'])) {
+            $userid = $this->session->userdata('sc_sess')['UserId'];
+            $data['role']         =  $this->mdocument->getRole($userid);
+
+             switch($data['role']->RoleId) {
+                case "1":
+                break;
+
+                case "2":
+                    $data['title']        =  "Print Document(s)";   
+                    $data['merchant']      =  $this->mdocument->getListMerchant();
+                    $data['document']      =  $this->mdocument->getListDocumentHistory($userid);
+                    $this->load->view('users/document-history/document-history', $data);
+                break;
+            }
+        }
+        else {
+            $this->session->set_flashdata("regMsg", "<div class=\"alert alert-danger fade in\" id=\"alert\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&#9679;</a>&nbsp; Can't access. Please login &nbsp;</div>");              
+            redirect(base_url());
+        }
+    }
+
 	public function projectDetails($id) {
         if(isset($this->session->userdata('sc_sess')['UserId'])) {  
             $userid = $this->session->userdata('sc_sess')['UserId'];
