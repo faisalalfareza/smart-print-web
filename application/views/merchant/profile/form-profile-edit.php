@@ -1,12 +1,13 @@
 <?php $UserId = $this->session->userdata('sc_sess')['UserId']; ?>  
 
     <!-- Upload Document -->
-    <div class="modal uploadDocument fade" id="uploadDocument" role="dialog">
+    <div class="modal editProfile fade" id="editProfile" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="document/uploadDocument" method="post" id="formResume" class="formResume" enctype="multipart/form-data" onsubmit="return false">
+                <form action="profile/updateProfile" method="post" enctype="multipart/form-data">
                     
-                <input type="hidden" name="UserId" value="<?=$UserId?>">    
+                <input type="hidden" name="UserId" value="<?=$UserId?>">
+                <input type="hidden" name="MerchantId" value="<?=$merchantId->MerchantId?>">    
                     
                 <!-- BEGIN Portlet PORTLET-->
                 <div class="portlet portlet-bordered">
@@ -32,15 +33,45 @@
                                 <div id="msgOne"></div>
 
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div class="portlet-title">
                                             <div class="caption caption-red">
-                                                <span class="caption-subject"> Detail Order </span> <br>
-                                                <span class="caption-helper"> Information for Merchant </span>
+                                                <span class="caption-subject"> Keterangan Singkat </span> <br>
+                                                <span class="caption-helper"> Setiap Informasi seputar Instansi Anda </span>
                                             </div>
                                         </div>
-                                
-                                        <div class="form-group">
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="inputDefault">Kode Instansi</label>
+                                                <input id="MerchantCode" type="text" max="6" name="MerchantCode" class="form-control input-form" placeholder="Masukkan Kode Instansi">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="inputDefault">Nama Instansi</label>
+                                                <input id="MerchantName" type="text" name="MerchantName" class="form-control input-form" placeholder="Masukkan Nama Instansi">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="inputDefault">Alamat</label>
+                                                <input id="MerchantAddress" type="text" name="MerchantAddress" class="form-control input-form" placeholder="Masukkan Alamat Instansi">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="inputDefault">Deskripsi Singkat</label>
+                                                <textarea id="MerchantDesc" name="MerchantDesc" class="form-control" rows="5" placeholder="Berikan catatan singkat tentang pesanan ini .."></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="inputSmall">Sejak kapan terbentuk</label>
+                                                <div class="input-group date" id="form_dt" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                    <input type="text" id="EstablishedDate" name="EstablishedDate" class="form-control input-form" placeholder="Tentukan kapan Instansi berdiri" required readonly/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input type="hidden" id="dtp_input2" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="form-group">
                                             <label class="control-label" for="inputDefault">Tipe ID</label>
                                             <select id="rsmReligion" name="TypeId" class="form-control selectpicker show-menu-arrow show-tick" 
                                             title="Select your Tipe ID" data-header="Choose those that are included in this project">
@@ -49,129 +80,40 @@
                                                 <option value="SIM">Surat Izin Mengemudi</option>
                                                 <option value="KITAS">Kartu Identitas</option>
                                             </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="inputDefault">Nomor ID</label>
-                                            <input id="rsmName" type="number" name="NumberId" class="form-control input-form" placeholder="Masukkan Nomor sesuai Tipe ID" autofocus>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="inputSmall">Waktu Pengambilan (Estimasi)</label>
-                                            <div class="input-group date" id="form_dt" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                <input type="text" id="rsmBirth" name="EstimationTime" class="form-control input-form" placeholder="Tentukan kapan akan diambil" required readonly/>
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </span>
-                                                <input type="hidden" id="dtp_input2" value="" />
-                                            </div>
-                                        </div>
+                                        </div> -->
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div class="portlet-title">
-                                            <div class="caption caption-red">
-                                                <span class="caption-subject"> Upload Document(s) </span> <br>
-                                                <span class="caption-helper"> Upload your file to be printed </span>
+                                            <div class="caption caption-red" style="margin-top:20px">
+                                                <span class="caption-subject"> Dimana Anda bisa dihubungi ? </span> <br>
+                                                <span class="caption-helper"> Memungkinkan untuk Pelanggan menghubungi Anda </span>
                                             </div>
                                         </div>
 
-                                        <div class="form-group fileUpload" style="margin-bottom: 25px;">
-                                            <div class="one_full">
-                                                <button type="button" class="btn fileUpload" style="width: 100%;padding: 20px 0 20px 0;">
-                                                    <i class="fa fa-file"></i> &nbsp; Tambah Lampiran
-                                                    <input type="file" name="userfile[]" class="upload" accept="image/*|.docx|.xlsx|.csv|.pdf" multiple />    
-                                                </button>
-                                                
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="inputDefault">Nomor Telp</label>
+                                                <input id="MerchantTelp" type="number" name="MerchantTelp" class="form-control input-form" placeholder="(+62): Masukkan Nomor Instansi" autofocus>
                                             </div>
-                                            <p class="caption-helper" style="padding-top:10px !important">You can upload <strong>DOC/XLSX/PDF Documents</strong> or <strong>JPG/JPEG/PNG Images</strong> file, with maximum file size 2 MB could upload.</p>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="inputDefault">Nama Dokumen</label>
-                                            <input type="text" name="DocumentName" class="form-control input-form" placeholder="Masukkan Judul Dokumen" autofocus>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="inputDefault">Email</label>
+                                                <textarea id="MerchantEmail" name="MerchantEmail" class="form-control" placeholder="Berikan email yang bisa untuk dihubungi .."></textarea>
+                                                <p class="caption-helper" style="padding-top:10px !important">Anda bisa menggunakan email <strong>Gmail/Yahoo/dll</strong> dan bisa <strong>lebih dari satu email</strong> dengan pemisah (,).</p>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="inputDefault">Catatan untuk Merchant</label>
-                                            <textarea id="ProDesc" name="Note" class="form-control" rows="5" placeholder="Berikan catatan singkat tentang pesanan ini .."></textarea>
-                                        </div>
+                                        
+                                        
                                         <div style="margin-top:30px;float:right">
                                             <button type="button" id="exit_profile" data-dismiss="modal" class="btn" style="padding:10px 20px">Cancel</button>
-                                            <button type="submit" class="btn btn-success endStepone" style="padding:10px 20px" disabled>Select Merchant</button>
+                                            <button type="submit" class="btn btn-success endStepone" style="padding:10px 20px">Update Profile</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>    
-                    <div class="portlet-container startStepfive" style="padding: 20px;">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="portlet-body">
-                                    <div class="centeredText ruleterms" style="margin: 60px 0;">
-                                        <div class="portlet-title">
-                                            <div class="caption caption-red">
-                                                <img src="<?=base_img()."icon/file-1-purple.png"?>" class="icon-form">
-                                                <span class="caption-subject" id="caption-news"></span>
-                                            </div>
-                                        </div>
-                                        <span>
-                                            It will show you the available merchant and you may print document(s) directly through this feature.
-                                            <a>Select a Merchant in where you ready to print.</a>
-                                        </span>
-                                    </div>                               
-                                </div>
-                            </div>
-                            <div class="col-lg-8">  
-                                <div class="portlet-title">
-                                    <div class="caption caption-red">
-                                        <span class="caption-subject"> Select Merchant </span> <br>
-                                        <span class="caption-helper"> Select merchant around you, to proceed easier </span>
-                                    </div>
-                                </div>                                                
-                                <div class="form-group">
-                                    <div class="list-group">
-                                        <?php 
-                                            foreach($merchant as $getMerchant){
-                                        ?>
-                                            <div class="pro-list">
-                                                <div class="list-group-item">
-                                                    <div class="row">
-                                                        <div class="col-sm-1">
-                                                            <div class="checkbox pull-left">
-                                                                <label>
-                                                                    <input type="radio" name="MerchantId" value="<?=$getMerchant->MerchantId?>|<?=$getMerchant->MerchantCode?>">                                        
-                                                                </label>   
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-11">
-                                                            <div class="pull-left form-control-inline">
-                                                                <a href="" class="list-group-item-heading title">
-                                                                    <span class="label label-success"><?=$getMerchant->MerchantCode?></span>
-                                                                    <?=$getMerchant->MerchantName?>
-                                                                </a>
-                                                                <p class="list-group-item-text sub-title"><?=$getMerchant->MerchantDesc?></p>
-                                                                <p class="list-group-item-text sub-title"><?=$getMerchant->MerchantAddress?></p>			
-                                                            </div>  
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </div>
-                                        <?php
-                                            }
-                                        ?>
-                                        <ul class="pagination pagination-sm mark" id="paging-pro"></ul>
-                                    </div>
-                                </div>                              
-                                <div style="margin-top:30px;float:right">
-                                    <button type="button" id="exit_two" data-dismiss="modal" class="btn" style="padding:10px 20px">Back</button>
-                                    <button type="submit" class="btn btn-success" style="padding:10px 20px">Send Request</button>
-                                </div>
-                                <!-- <div class="action_btns">
-                                    <div class="one_half"><button type="button" id="exit_two" data-dismiss="modal" class="btn">Back</button></div> 
-                                    <div class="one_half last"><button type="submit" class="btn btn-success endProjectone">Assign</button></div>     
-                                </div> -->
-                            </div>
-                        </div>
-                        <div class="action_btns"></div>
-                    </div>    
+                    </div>      
                 </div>
                 <!-- END Portlet PORTLET-->
                 </form>

@@ -182,8 +182,9 @@
 
                                 case "3":
                                     ?>
-
+                                    
                                     <a href="<?=site_url('index.php/document')?>" class="btn btn-white">Manage Document</a>  
+                                    <a href="<?=site_url('index.php/document')?>" class="btn btn-white" style="border:0;">Profile</a>  
 
                                     <?php
                                 break;
@@ -332,7 +333,8 @@
         <script type="text/javascript">
           $(document).ready(function () {    
               $(function(){
-                $.material.init();
+                $.material.init();     
+
                 $(".form-group select").dropdown();
                 $('.modal-dialog').draggable(); 
                 $('input[data-toggle="popover"]').popover({

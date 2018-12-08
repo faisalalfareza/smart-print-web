@@ -31,7 +31,8 @@ class Document extends CI_Controller {
 	{
         if(isset($this->session->userdata('sc_sess')['UserId'])) {
             $userid = $this->session->userdata('sc_sess')['UserId'];
-            $data['role']         =  $this->mdocument->getRole($userid);
+            $data['role'] = $this->mdocument->getRole($userid);
+            
 
             switch($data['role']->RoleId) {
                 case "1":
@@ -47,12 +48,12 @@ class Document extends CI_Controller {
                 case "3":
                     $data['title']         =  "Manage Document(s)";	
                     $data['merchant']      =  $this->mdocument->getListMerchant();
+                    $data['merchantId']    =  $this->mdocument->getMerchantId($userid);
                     $data['document']      =  $this->mdocument->getListDocument($userid);
                     
                     $data['requested']     =  $this->mdocument->getRequestedDocument();
                     $data['processed']     =  $this->mdocument->getProcessedDocument();
                     $data['finished']      =  $this->mdocument->getFinishedDocument();
-
                     $this->load->view('merchant/manage-document/manage-document', $data);
                 break;
             }

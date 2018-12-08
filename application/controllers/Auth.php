@@ -106,11 +106,8 @@ class Auth extends CI_Controller {
         $pass  =  $this->security->xss_clean($this->input->post('UserPass'));
         $UserRole  =  $this->security->xss_clean($this->input->post('UserRole'));
         
-        if($UserRole == 'User'){
-            $RoleId = '2';
-        }else{
-            $RoleId = '3';
-        }
+        if ($UserRole == 'User') $RoleId = '2'; //User
+        else $RoleId = '3'; //Merchant
         
         $data = array(
             'UserStatus'   => '1',
@@ -122,8 +119,11 @@ class Auth extends CI_Controller {
         $data = $this->security->xss_clean($data);
         $unique = $this->authm->checking_unique($email);
         if ($unique->num_rows() == 0) {
-            $this->authm->add_record($data);             
-            // $this->authm->add_to_userrole();
+            $this->authm->add_record_to_msuser($data);
+            $userId = $this->db->insert_id();
+            if ($RoleId == '3') {
+                $this->authm->add_record_to_msmerchant($userId, $email);
+            }
 
             $config = array(
                 'charset'       => 'utf-8',

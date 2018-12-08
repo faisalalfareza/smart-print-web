@@ -8,7 +8,7 @@ class Authm extends CI_Model {
     }
 
     function checking_unique( $email ) {  
-        return $this->db->get_where('ms_user', array('UserEmail'=>$email));
+        return $this->db->get_where('ms_user', array('UserEmail' => $email));
     }       
 
     /* BCrypte Hashing */
@@ -22,6 +22,7 @@ class Authm extends CI_Model {
             return null;
         }
     }
+
     function getUsers($UserPass) {
         $query = $this->db->get('ms_user');
 
@@ -48,8 +49,16 @@ class Authm extends CI_Model {
         return $this->db->get('ms_user')->result();
     }
 
-    function add_record( $data ) {
+    function add_record_to_msuser($data) {
         return $this->db->insert('ms_user', $data);
+    }
+
+    function add_record_to_msmerchant($userId, $email) {
+        $data = array(
+            'UserId' => $userId,
+            'MerchantEmail' => $email
+        );
+        return $this->db->insert('ms_merchant', $data);
     }   
 
     // function add_to_userrole() {

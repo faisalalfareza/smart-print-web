@@ -13,6 +13,12 @@ class Mdocument extends CI_Model {
         return $query->row();
     }
 
+    function getMerchantId( $userid ) {
+        $getRole = "SELECT MerchantId from ms_merchant WHERE UserId = ?";
+        $query = $this->db->query($getRole, array($userid));
+        return $query->row();
+    }
+
     // User
 
     function getListMerchant() {

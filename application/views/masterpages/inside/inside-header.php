@@ -104,7 +104,7 @@
                                 </li> 
                                 <li class="dropdown"><a class="btn" href="javascript:void(0)"><?=$UserEmail?> <i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="<?=site_url('index.php/document')?>">Edit Profile</a></li>
+                                        <li><a href="javascript:void(0)" data-backdrop="false" data-toggle="modal" data-target="#editProfile">Edit Profile</a></li>
                                         <li><a href="<?=site_url('index.php/auth/logout')?>">Logout</a></li>
                                     </ul>
                                 </li>    
@@ -131,3 +131,5 @@
         </div>
     </header>
     <!--/#header-->    
+
+    <?php $this->load->view('merchant/profile/form-profile-edit'); ?>

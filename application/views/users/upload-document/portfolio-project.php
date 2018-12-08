@@ -30,7 +30,7 @@
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul class="nav navbar-nav resume">
                         <li>
-                            <a class="menu" href="javascript:void(0)" data-backdrop="false" data-toggle="modal" data-target="#createResume">Upload New Document </a>                 
+                            <a class="menu" href="javascript:void(0)" data-backdrop="false" data-toggle="modal" data-target="#uploadDocument">Upload New Document </a>                 
                         </li>                                        
                         <li class="dropdown dropdown-large"> 
                             <a href="#" class="dropdown-toggle menu" data-toggle="dropdown">Filter By</a>

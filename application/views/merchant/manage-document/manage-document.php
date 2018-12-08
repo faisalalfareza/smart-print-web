@@ -237,7 +237,25 @@
     <!-- End Custom Javascript -->       
 
     <script type="text/javascript">
-        var $ = jQuery.noConflict(); 
+        $(document).ready(function () {    
+            $(function() {
+                $.material.init();
+                $('.modal-dialog').draggable();
+                $('.popup-container').draggable();
+                $('#allWaiting').change(function () {
+                    $("input:checkbox.waiting").prop('checked', $(this).prop("checked"));
+                });
+                $('#allAccepted').change(function () {
+                    $("input:checkbox.accepted").prop('checked', $(this).prop("checked"));
+                });     
+                $('.requested-list')
+                    .pageMe({pagerSelector:'#paging-requested',showPrevNext:true,hidePageNumbers:false,perPage:3});
+                $('.processed-list')
+                    .pageMe({pagerSelector:'#paging-processed',showPrevNext:true,hidePageNumbers:false,perPage:3});                            
+            });
+            $('.finished-list')
+                .pageMe({pagerSelector:'#paging-finished',showPrevNext:true,hidePageNumbers:false,perPage:3});                            
+        });
         $.fn.pageMe = function(opts){
             var $this = this,
                 defaults = {
@@ -339,26 +357,6 @@
 
             }
         };
-
-        $(document).ready(function () {    
-            $(function(){
-            $.material.init();
-            $('.modal-dialog').draggable();
-            $('.popup-container').draggable();
-            $('#allWaiting').change(function () {
-                $("input:checkbox.waiting").prop('checked', $(this).prop("checked"));
-            });
-            $('#allAccepted').change(function () {
-                $("input:checkbox.accepted").prop('checked', $(this).prop("checked"));
-            });     
-            $('.requested-list')
-                .pageMe({pagerSelector:'#paging-requested',showPrevNext:true,hidePageNumbers:false,perPage:3});
-            $('.processed-list')
-                .pageMe({pagerSelector:'#paging-processed',showPrevNext:true,hidePageNumbers:false,perPage:3});                            
-            });
-            $('.finished-list')
-                .pageMe({pagerSelector:'#paging-finished',showPrevNext:true,hidePageNumbers:false,perPage:3});                            
-            });
         });
              
     </script>       
