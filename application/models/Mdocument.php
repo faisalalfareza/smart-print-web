@@ -29,20 +29,20 @@ class Mdocument extends CI_Model {
     function getListDocument($userid) {
         
         $getDocumentName = "SELECT trdocdet.DocumentName, trdocdet.Note, msmrc.MerchantName
-                  FROM tr_document trdoc 
+                  FROM tr_document trdoc
                   JOIN tr_document_detail trdocdet 
                         ON trdoc.DocumentId = trdocdet.DocumentId
                   JOIN ms_merchant msmrc
                         ON trdoc.MerchantId = msmrc.MerchantId
-                  WHERE trdoc.UserId = ? 
+                  WHERE $userid = trdoc.UserId
                         AND trdoc.DocumentId = trdocdet.DocumentId
                   GROUP BY trdocdet.DocumentName";
         $executeDocumentName = $this->db->query($getDocumentName, array($userid))->result();
 
-        $getJoinDocument = "SELECT * FROM tr_document trdoc 
+        $getJoinDocument = "SELECT * FROM ms_user msuser, tr_document trdoc 
                   JOIN tr_document_detail trdocdet 
                   ON trdoc.DocumentId = trdocdet.DocumentId
-                  WHERE trdoc.UserId = ? 
+                  WHERE msuser.UserId = trdoc.UserId 
                         AND trdoc.DocumentId = trdocdet.DocumentId";
         $executeJoinDocument = $this->db->query($getJoinDocument, array($userid))->result();
 
@@ -79,7 +79,7 @@ class Mdocument extends CI_Model {
                         ON trdoc.DocumentId = trdocdet.DocumentId
                   JOIN ms_merchant msmrc
                         ON trdoc.MerchantId = msmrc.MerchantId
-                  WHERE trdoc.status = 'finished' AND trdoc.UserId = ? 
+                  WHERE trdoc.status = 'finished' AND trdoc.UserId = $userid 
                         AND trdoc.DocumentId = trdocdet.DocumentId
                   GROUP BY trdocdet.DocumentName";
         $executeDocumentName = $this->db->query($getDocumentName, array($userid))->result();
@@ -136,12 +136,12 @@ class Mdocument extends CI_Model {
     //   Merchant
 
     function getRequestedDocument() {
-        $getReqDocument = "SELECT * FROM tr_document trdoc 
+        $getReqDocument = "SELECT * FROM ms_merchant msmerch, tr_document trdoc 
                   JOIN tr_document_detail trdocdet 
                     ON trdoc.DocumentId = trdocdet.DocumentId
                   JOIN ms_user msu 
                     ON msu.UserId = trdoc.UserId
-                  WHERE trdoc.DocumentId = trdocdet.DocumentId
+                  WHERE trdoc.MerchantId = msmerch.MerchantId AND trdoc.DocumentId = trdocdet.DocumentId
                     AND trdoc.Status = ?";
         $executeJoinDocument = $this->db->query($getReqDocument, array('requested'))->result();
         return $executeJoinDocument;
