@@ -130,15 +130,21 @@ class Document extends CI_Controller {
             $config['upload_path']          = $path;
             $config['allowed_types']        = 'gif|jpg|jpeg|png|docx|xlsx|csv|pdf';
             $config['overwrite']            = 1;
-            $config['max_size']             = 2048;
-            $config['max_width']            = 1024;
-            $config['max_height']           = 768;
+            $config['max_size']             = 8192;
+            // $config['max_width']            = 1024;
+            // $config['max_height']           = 768;
 
             // Load and initialize upload library
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
 
             $filesCount = count($_FILES['userfile']['name']);
+            print_r($this->input->post('DocumentName') . "\n");
+            print_r($this->input->post('Note') . "\n");
+            print_r($this->input->post('EstimationTime') . "\n");
+            
+
+            // print_r($_FILES['userfile']);
             for($i = 0; $i < $filesCount; $i++) {
 
                 // File upload configuration
@@ -147,6 +153,15 @@ class Document extends CI_Controller {
                 $_FILES['file']['tmp_name']     = $_FILES['userfile']['tmp_name'][$i];
                 $_FILES['file']['error']        = $_FILES['userfile']['error'][$i];
                 $_FILES['file']['size']         = $_FILES['userfile']['size'][$i];
+
+                echo "<br><br>FILE(S)";
+                echo "<br>  NAME : ". $_FILES['file']['name'];
+                echo "<br>  TYPE : ". $_FILES['file']['type'];
+                echo "<br>  TMP_NAME : ". $_FILES['file']['tmp_name'];
+                echo "<br>  ERROR : ". $_FILES['file']['error'];
+                echo "<br>  SIZE : ". $_FILES['file']['size'];
+
+                
 
                 $batch = $this->mdocument->getCurrentBatchMerchant($merchantId);
                     
@@ -179,6 +194,7 @@ class Document extends CI_Controller {
                         'Note'            =>  $this->input->post('Note'),
                         'EstimationTime'  =>  $this->input->post('EstimationTime')
                     );
+
                     $this->mdocument->uploadDocDetail($reqTrDocumentDetail);
                     $documentId = $this->db->insert_id();
 
@@ -195,12 +211,15 @@ class Document extends CI_Controller {
                         'UploadedOn'      =>  date("l, d M Y H:i:s")
                     );
                     $this->mdocument->uploadDoc($reqTrDocument);
+                    $this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\">Upload Document \"" .$this->input->post('DocumentName'). "\" Successfully</div>");
+                } else {
+                    $this->session->set_flashdata("pesan", "<div class='alert alert-warning' id='alert'>" .$this->upload->display_errors(). "</div>");
+                    // echo $this->upload->display_errors();
                 }
 
             }
         }
-
-        $this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\">Upload Document \"" .$this->input->post('DocumentName'). "\" Successfully</div>");
+        
         redirect($this->agent->referrer());
 	}
 
