@@ -49,6 +49,7 @@ class Mdocument extends CI_Model {
         $data = null; 
         foreach($executeDocumentName as $doc) {
             foreach($executeJoinDocument as $joinDoc) {
+                
                 if ($doc->DocumentName == $joinDoc->DocumentName) {
                     $docDetail[] = $joinDoc;
                     $docSatus[] = $joinDoc->Status;

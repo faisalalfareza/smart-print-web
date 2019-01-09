@@ -42,7 +42,10 @@ class Document extends CI_Controller {
                     $data['title']        =  "Print Document(s)";	
                     $data['merchant']      =  $this->mdocument->getListMerchant();
                     $data['document']      =  $this->mdocument->getListDocument($userid);
-                    $this->load->view('users/upload-document/portfolio-project', $data);
+
+                    if (count($data['document']) == 0) { 
+                        $this->session->set_flashdata("pesan", "<div class='alert alert-info' id='alert'> Have never uploaded documents before </div>"); 
+                    } $this->load->view('users/upload-document/portfolio-project', $data);
                 break;
 
                 case "3":
@@ -65,8 +68,7 @@ class Document extends CI_Controller {
         }
     } 
 
-    public function dHistory()
-    {
+    public function dHistory() {
         if(isset($this->session->userdata('sc_sess')['UserId'])) {
             $userid = $this->session->userdata('sc_sess')['UserId'];
             $data['role']         =  $this->mdocument->getRole($userid);
@@ -214,7 +216,6 @@ class Document extends CI_Controller {
                     $this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\">Upload Document \"" .$this->input->post('DocumentName'). "\" Successfully</div>");
                 } else {
                     $this->session->set_flashdata("pesan", "<div class='alert alert-warning' id='alert'>" .$this->upload->display_errors(). "</div>");
-                    // echo $this->upload->display_errors();
                 }
 
             }
@@ -244,111 +245,111 @@ class Document extends CI_Controller {
         redirect($this->agent->referrer());
     }
     
-    function updateproject() {
-        $data = array(
-            'ProName'             => $this->input->post('ProName'),
-            'ProSites'            => $this->input->post('ProSites'),
-            'ProDesc'             => $this->input->post('ProDesc'),
-            'ProStatus'           => $this->input->post('ProStatus')
-        );  
-        $data = $this->security->xss_clean($data);
-        $this->mdocument->updateproject($data); 
+    // function updateproject() {
+    //     $data = array(
+    //         'ProName'             => $this->input->post('ProName'),
+    //         'ProSites'            => $this->input->post('ProSites'),
+    //         'ProDesc'             => $this->input->post('ProDesc'),
+    //         'ProStatus'           => $this->input->post('ProStatus')
+    //     );  
+    //     $data = $this->security->xss_clean($data);
+    //     $this->mdocument->updateproject($data); 
 
-        helper_log("update", "update project ".$this->input->post('ProName')); 
-        $this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\">Updating project success</div>");           
-        redirect('users/upload-document/project');  
-    }
+    //     helper_log("update", "update project ".$this->input->post('ProName')); 
+    //     $this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\">Updating project success</div>");           
+    //     redirect('users/upload-document/project');  
+    // }
     
-	function updateteam() {                
-        $rsumid = $this->input->post('item');
-        $proid  = $this->input->post('ProId');
+	// function updateteam() {                
+    //     $rsumid = $this->input->post('item');
+    //     $proid  = $this->input->post('ProId');
 
         
-        foreach($rsumid as $item){                
-            $rsumpro = array(
-                'RsumId'      => $item,
-                'ProId'       => $proid,
-                'AsignStatus' => 0
-            );    
+    //     foreach($rsumid as $item){                
+    //         $rsumpro = array(
+    //             'RsumId'      => $item,
+    //             'ProId'       => $proid,
+    //             'AsignStatus' => 0
+    //         );    
 
-            $rsumname = $this->mdocument->RsumName($item);
-            $proname = $this->mdocument->ProName($proid)->result();
-            helper_log("asign", "asign member ".$rsumname[0]->RsumName." to project ".$proname[0]->ProName);
-            $this->db->insert('tbresume_project', $rsumpro);
-        }    
+    //         $rsumname = $this->mdocument->RsumName($item);
+    //         $proname = $this->mdocument->ProName($proid)->result();
+    //         helper_log("asign", "asign member ".$rsumname[0]->RsumName." to project ".$proname[0]->ProName);
+    //         $this->db->insert('tbresume_project', $rsumpro);
+    //     }    
         
-        $this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\">Asign Member Success. Wait for confirmation</div>");
-        redirect('users/upload-document/project/projectDetails/'.$this->encrypt->encode($proid));             
-	}    
+    //     $this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\">Asign Member Success. Wait for confirmation</div>");
+    //     redirect('users/upload-document/project/projectDetails/'.$this->encrypt->encode($proid));             
+	// }    
 
-    function confirm( $rsumid, $proid ) {
-        $rsumid =  $this->encrypt->decode($rsumid);
-        $proid  =  $this->encrypt->decode($proid);
-        $this->mdocument->confirm($rsumid, $proid);  
+    // function confirm( $rsumid, $proid ) {
+    //     $rsumid =  $this->encrypt->decode($rsumid);
+    //     $proid  =  $this->encrypt->decode($proid);
+    //     $this->mdocument->confirm($rsumid, $proid);  
 
-        $rsumname = $this->mdocument->RsumName($rsumid); 
-        $proname = $this->mdocument->ProName($proid)->result();
-        helper_log("confirm", "confirm member ".$rsumname[0]->RsumName." to ".$proname[0]->ProName); 
-        redirect($this->agent->referrer());       
-    }   
+    //     $rsumname = $this->mdocument->RsumName($rsumid); 
+    //     $proname = $this->mdocument->ProName($proid)->result();
+    //     helper_log("confirm", "confirm member ".$rsumname[0]->RsumName." to ".$proname[0]->ProName); 
+    //     redirect($this->agent->referrer());       
+    // }   
 
-    function confirm_group() {
-        $this->mdocument->confirm_group();  
-        redirect($this->agent->referrer());        
-    }    
+    // function confirm_group() {
+    //     $this->mdocument->confirm_group();  
+    //     redirect($this->agent->referrer());        
+    // }    
     
-    function delete($id) {
-        $proname = $this->mdocument->ProName($id)->result();
-        helper_log("delete", "delete project ".$proname[0]->ProName);
+    // function delete($id) {
+    //     $proname = $this->mdocument->ProName($id)->result();
+    //     helper_log("delete", "delete project ".$proname[0]->ProName);
 
-        $this->mdocument->delete($id);
-        $this->session->set_flashdata("pesan", "<div class=\"alert alert-warning\" id=\"alert\">Deleting Project Success</div>");        
-        redirect("users/upload-document/project");
-    }      
+    //     $this->mdocument->delete($id);
+    //     $this->session->set_flashdata("pesan", "<div class=\"alert alert-warning\" id=\"alert\">Deleting Project Success</div>");        
+    //     redirect("users/upload-document/project");
+    // }      
     
-    public function do_upload() {
-        if(!empty($_FILES['userfile']['name'])) {
-            $uploadData = array();
-            $specificName = 'MKT-' .$this->session->userdata('sc_sess')['UserId']. '-' .date("dmY"). '-' .date("His");
-            $path = './assets/images/uploads/upload-documents/' .$specificName;
-            if(!is_dir($path)) //create the folder if it's not already exists 
-            {
-                mkdir($path, 0755, TRUE);
-            }
+    // public function do_upload() {
+    //     if(!empty($_FILES['userfile']['name'])) {
+    //         $uploadData = array();
+    //         $specificName = 'MKT-' .$this->session->userdata('sc_sess')['UserId']. '-' .date("dmY"). '-' .date("His");
+    //         $path = './assets/images/uploads/upload-documents/' .$specificName;
+    //         if(!is_dir($path)) //create the folder if it's not already exists 
+    //         {
+    //             mkdir($path, 0755, TRUE);
+    //         }
 
-            $filesCount = count($_FILES['userfile']['name']);
-            for($i = 0; $i < $filesCount; $i++) {
+    //         $filesCount = count($_FILES['userfile']['name']);
+    //         for($i = 0; $i < $filesCount; $i++) {
 
-                // File upload configuration
-                $_FILES['file']['name']         = $_FILES['userfile']['name'][$i];
-                $_FILES['file']['type']         = $_FILES['userfile']['type'][$i];
-                $_FILES['file']['tmp_name']     = $_FILES['userfile']['tmp_name'][$i];
-                $_FILES['file']['error']        = $_FILES['userfile']['error'][$i];
-                $_FILES['file']['size']         = $_FILES['userfile']['size'][$i];
+    //             // File upload configuration
+    //             $_FILES['file']['name']         = $_FILES['userfile']['name'][$i];
+    //             $_FILES['file']['type']         = $_FILES['userfile']['type'][$i];
+    //             $_FILES['file']['tmp_name']     = $_FILES['userfile']['tmp_name'][$i];
+    //             $_FILES['file']['error']        = $_FILES['userfile']['error'][$i];
+    //             $_FILES['file']['size']         = $_FILES['userfile']['size'][$i];
 
-                $config['upload_path']          = $path;
-                $config['allowed_types']        = 'gif|jpg|jpeg|png|docx|xlsx|csv|pdf';
-                $config['overwrite']            = 1;
-                $config['max_size']             = 2048;
-                $config['max_width']            = 1024;
-                $config['max_height']           = 768;
+    //             $config['upload_path']          = $path;
+    //             $config['allowed_types']        = 'gif|jpg|jpeg|png|docx|xlsx|csv|pdf';
+    //             $config['overwrite']            = 1;
+    //             $config['max_size']             = 2048;
+    //             $config['max_width']            = 1024;
+    //             $config['max_height']           = 768;
 
-                // Load and initialize upload library
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
+    //             // Load and initialize upload library
+    //             $this->load->library('upload', $config);
+    //             $this->upload->initialize($config);
 
-                // Upload file to server
-                if ($this->upload->do_upload('file'))
-                {
-                    // Uploaded file data
-                    $data = $this->upload->data();
-                    $uploadData[$i]['file_name'] = $data['file_name'];
-                    $uploadData[$i]['uploaded_on'] = date("Y-m-d H:i:s");
-                    print_r($uploadData);
-                    // $this->load->view('upload/upload_success', $data);
-                }
+    //             // Upload file to server
+    //             if ($this->upload->do_upload('file'))
+    //             {
+    //                 // Uploaded file data
+    //                 $data = $this->upload->data();
+    //                 $uploadData[$i]['file_name'] = $data['file_name'];
+    //                 $uploadData[$i]['uploaded_on'] = date("Y-m-d H:i:s");
+    //                 print_r($uploadData);
+    //                 // $this->load->view('upload/upload_success', $data);
+    //             }
 
-            }
-        }
-	}
+    //         }
+    //     }
+	// }
 }
