@@ -102,7 +102,7 @@
                                                 $count = 0;
                                                 $countFinish = 0;
                                                 foreach($getDoc['DocumentDetail'] as $getDocDet) {
-                                                    if ($getDocDet->DocumentName == $getDoc['DocumentName']) {
+                                                    // if ($getDocDet->DocumentName == $getDoc['DocumentName']) {
                                             ?>   
                                                 <li class="ellipsis" style="margin-left: -25px;">
                                                     <?php 
@@ -112,7 +112,7 @@
                                                         else if($getDocDet->Status == "requested") $status = "primary|R";
                                                     ?>
                                                     <span class="label label-<?=explode('|', $status)[0]?>"><?=explode('|', $status)[1]?></span> 
-                                                    <a href="<?=$getDocDet->LinkFileUrl?>"><?=$getDocDet->DocumentName?></a>
+                                                    <a href="<?=$getDocDet->LinkFileUrl?>"><?=$getDocDet->FileName?></a>
                                                 </li>
                                             <?php
                                                     $count++;
@@ -121,8 +121,8 @@
 
                                                     $i = $countFinish / $count;
                                                     $finishedPresentage = ($i * 100);
-                                                    
-                                                    }
+
+                                                    // }
                                                 }
                                             ?>
                                         </ul>

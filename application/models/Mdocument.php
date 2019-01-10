@@ -48,9 +48,11 @@ class Mdocument extends CI_Model {
 
         $data = null; 
         foreach($executeDocumentName as $doc) {
+            // echo "<br> [PARENT] DocumentName : " .  $doc->DocumentName;
             foreach($executeJoinDocument as $joinDoc) {
                 
-                if ($doc->DocumentName == $joinDoc->DocumentName) {
+                if ($joinDoc->DocumentName === $doc->DocumentName) {
+                    // echo "<br>&nbsp;&nbsp;&nbsp; [CHILD] DocumentName : " .  $joinDoc->DocumentName;
                     $docDetail[] = $joinDoc;
                     $docSatus[] = $joinDoc->Status;
                 }
@@ -61,6 +63,24 @@ class Mdocument extends CI_Model {
             if ( (in_array("requested", $docSatus)) && (!in_array("inprogress", $docSatus)) && (!in_array("finished", $docSatus)) ) $status = "requested";
             if ( (in_array("finished", $docSatus)) && (!in_array("inprogress", $docSatus)) && (!in_array("requested", $docSatus)) ) $status = "finished";
 
+            // echo "<br> [PARENT] DocumentName : " .  $doc->DocumentName;
+            for($i = 0; $i < count($docDetail); $i++) {
+                if ($doc->DocumentName === $docDetail[$i]->DocumentName) {
+                    $finalDocDetail[] = $docDetail[$i];
+                    
+                    // echo "<br>&nbsp;&nbsp;&nbsp; [CHILD] DocumentName : " .  $det->DocumentName;
+                } else {
+                    error_reporting(0);
+                    if ($docDetail[$i]) {
+                        // echo "<br>&nbsp;&nbsp;&nbsp; [INDEX] : " .  $i . "<br>";
+                        // print_r($docDetail[$i]);
+                        
+                        unset($docDetail[$i]);
+                    }
+                    
+                }
+            }            
+            
             $data[] = array(
                 'DocumentName'      => $doc->DocumentName,
                 'MerchantName'      => $doc->MerchantName,
@@ -69,6 +89,7 @@ class Mdocument extends CI_Model {
                 'DocumentDetail'    => $docDetail
             );
         }
+
         return $data;
     } 
 
