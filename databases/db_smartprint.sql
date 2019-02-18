@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03 Nov 2018 pada 05.48
+-- Generation Time: 18 Feb 2019 pada 07.15
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -60,8 +60,8 @@ CREATE TABLE `ms_batch_merchant` (
 --
 
 INSERT INTO `ms_batch_merchant` (`MerchantId`, `MerchantQueueNumber`) VALUES
-(2, 2),
-(1, 4);
+(1, 12),
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -100,12 +100,12 @@ INSERT INTO `ms_category` (`CategoryId`, `CategoryName`) VALUES
 
 CREATE TABLE `ms_merchant` (
   `MerchantId` int(20) NOT NULL,
-  `MerchantCode` varchar(6) NOT NULL,
-  `MerchantName` varchar(50) NOT NULL,
-  `MerchantAddress` text NOT NULL,
+  `MerchantCode` varchar(6) DEFAULT NULL,
+  `MerchantName` varchar(50) DEFAULT NULL,
+  `MerchantAddress` text,
   `MerchantDesc` text,
-  `MerchantTelp` text NOT NULL,
-  `MerchantEmail` text NOT NULL,
+  `MerchantTelp` text,
+  `MerchantEmail` text,
   `EstablishedDate` varchar(30) DEFAULT NULL,
   `HowManyFeedback` bigint(100) DEFAULT NULL,
   `WorkTime` varchar(30) DEFAULT NULL,
@@ -275,17 +275,19 @@ CREATE TABLE `ms_user` (
   `UserId` int(20) NOT NULL,
   `UserEmail` varchar(100) NOT NULL,
   `UserPass` varchar(100) NOT NULL,
-  `UserStatus` varchar(50) NOT NULL
+  `UserStatus` varchar(50) NOT NULL,
+  `RoleId` int(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `ms_user`
 --
 
-INSERT INTO `ms_user` (`UserId`, `UserEmail`, `UserPass`, `UserStatus`) VALUES
-(95, 'user@smartprint.com', '$2a$08$PLjZ4KFu/2a7eB9Nwl3fnOY1H1Hfg4EY5A.tulgkN1WvIxYJhcl7q', '1'),
-(172, 'admin@smartprint.com', '$2a$08$XhpviPzBRFm9WnoTAunnQOeo0aJPqqClerJ7XNYSYaLcwq2ijNLkq', '1'),
-(171, 'merchant@smartprint.com', '$2a$08$7Hibs89mDtmQfL4qtGgPBOG.AN9X8IHBFfzF1HmCgLt/PC0AsRA/6', '1');
+INSERT INTO `ms_user` (`UserId`, `UserEmail`, `UserPass`, `UserStatus`, `RoleId`) VALUES
+(95, 'user@smartprint.com', '$2a$08$PLjZ4KFu/2a7eB9Nwl3fnOY1H1Hfg4EY5A.tulgkN1WvIxYJhcl7q', '1', 2),
+(172, 'admin@smartprint.com', '$2a$08$XhpviPzBRFm9WnoTAunnQOeo0aJPqqClerJ7XNYSYaLcwq2ijNLkq', '1', 1),
+(171, 'merchant@smartprint.com', '$2a$08$7Hibs89mDtmQfL4qtGgPBOG.AN9X8IHBFfzF1HmCgLt/PC0AsRA/6', '1', 3),
+(177, 'faisal.user@smartprint.com', '$2a$08$p.o/m0Wl1smKbmALpXDpReR9G18P17p.CFAPdmjyBtmtaggEtqvay', '1', 2);
 
 -- --------------------------------------------------------
 
@@ -330,12 +332,18 @@ CREATE TABLE `tr_document` (
 --
 
 INSERT INTO `tr_document` (`QueueNumber`, `DocumentId`, `MerchantId`, `UserId`, `Status`, `UploadedOn`, `ProcessedOn`, `FinishedOn`) VALUES
-('MJST-95-02112018-094331-1', 65, 2, 95, 'inprogress', 'Friday, 02 Nov 2018 09:43:31', NULL, NULL),
-('MJST-95-02112018-094331-2', 66, 2, 95, 'requested', 'Friday, 02 Nov 2018 09:43:31', NULL, NULL),
-('MSTRO-95-02112018-095354-1', 67, 1, 95, 'requested', 'Friday, 02 Nov 2018 09:53:54', NULL, NULL),
-('MSTRO-95-02112018-100653-2', 68, 1, 95, 'inprogress', 'Friday, 02 Nov 2018 10:06:53', NULL, NULL),
-('MSTRO-95-02112018-100653-3', 69, 1, 95, 'inprogress', 'Friday, 02 Nov 2018 10:06:53', NULL, NULL),
-('MSTRO-95-02112018-164250-4', 70, 1, 95, 'requested', 'Friday, 02 Nov 2018 16:42:50', NULL, NULL);
+('MJST-177-19012019-061212-1', 91, 2, 177, 'finished', 'Saturday, 19 Jan 2019 06:12:12', NULL, NULL),
+('MSTRO-177-09012019-163833-1', 81, 1, 177, 'requested', 'Wednesday, 09 Jan 2019 16:38:33', NULL, NULL),
+('MSTRO-177-09012019-163833-2', 82, 1, 177, 'requested', 'Wednesday, 09 Jan 2019 16:38:33', NULL, NULL),
+('MSTRO-177-09012019-163933-3', 83, 1, 177, 'requested', 'Wednesday, 09 Jan 2019 16:39:33', NULL, NULL),
+('MSTRO-177-09012019-172524-4', 84, 1, 177, 'requested', 'Wednesday, 09 Jan 2019 17:25:24', NULL, NULL),
+('MSTRO-177-09012019-172524-6', 85, 1, 177, 'requested', 'Wednesday, 09 Jan 2019 17:25:24', NULL, NULL),
+('MSTRO-177-10012019-052718-7', 86, 1, 177, 'requested', 'Thursday, 10 Jan 2019 05:27:18', NULL, NULL),
+('MSTRO-177-10012019-052718-8', 87, 1, 177, 'requested', 'Thursday, 10 Jan 2019 05:27:18', NULL, NULL),
+('MSTRO-177-10012019-052719-10', 89, 1, 177, 'requested', 'Thursday, 10 Jan 2019 05:27:19', NULL, NULL),
+('MSTRO-177-10012019-052719-9', 88, 1, 177, 'requested', 'Thursday, 10 Jan 2019 05:27:19', NULL, NULL),
+('MSTRO-177-10012019-052813-11', 90, 1, 177, 'requested', 'Thursday, 10 Jan 2019 05:28:13', NULL, NULL),
+('MSTRO-177-19012019-084405-12', 92, 1, 177, 'finished', 'Saturday, 19 Jan 2019 08:44:05', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -358,12 +366,18 @@ CREATE TABLE `tr_document_detail` (
 --
 
 INSERT INTO `tr_document_detail` (`DocumentId`, `DocumentName`, `DocumentType`, `LinkFileUrl`, `FileName`, `Note`, `EstimationTime`) VALUES
-(65, 'Tugas Basis Data - Praktek Mysql', '.docx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MJST95-02112018-094331/TUGAS_PERTEMUAN_2_-_STORE_PROCEDURE.docx', 'TUGAS_PERTEMUAN_2_-_STORE_PROCEDURE.docx', 'Mohon untuk dicetak dengan rapi dan baik, karena akan dipergunakan sebagai dokumen penting untuk masa depan', ''),
-(66, 'Tugas Basis Data - Praktek Mysql', '.docx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MJST95-02112018-094331/TUGAS_PERTEMUAN_3_-_TRIGGER.docx', 'TUGAS_PERTEMUAN_3_-_TRIGGER.docx', 'Mohon untuk dicetak dengan rapi dan baik, karena akan dipergunakan sebagai dokumen penting untuk masa depan', ''),
-(67, 'Ticket Pergi - Visionet', '.PDF', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO95-02112018-095354/QLCBXJ.PDF', 'QLCBXJ.PDF', 'Bewarna & Kertas Folio', '09 November 2018'),
-(68, 'Tugas Bahasa Indonesia', '.docx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO95-02112018-100652/TUGAS_2_-_161116039_Faisal_Alfareza_-_Koreksi_Artikel_-_Penggunaan_Smartphone_dan_Interaksi_Sosial_Pada_Remaja.docx', 'TUGAS_2_-_161116039_Faisal_Alfareza_-_Koreksi_Artikel_-_Penggunaan_Smartphone_dan_Interaksi_Sosial_Pada_Remaja.docx', 'pelayanan di bidang printing di mana masyarakat bisa mendapatkan berbagai produk printing sekaligus di satu tempat', '07 November 2018'),
-(69, 'Tugas Bahasa Indonesia', '.docx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO95-02112018-100652/TUGAS_4_-_161116039_Faisal_Alfareza_-_Teks_3_Bahasa.docx', 'TUGAS_4_-_161116039_Faisal_Alfareza_-_Teks_3_Bahasa.docx', 'pelayanan di bidang printing di mana masyarakat bisa mendapatkan berbagai produk printing sekaligus di satu tempat', '07 November 2018'),
-(70, 'UTS Pemrograman Perangkat Bergerak (PPB) - Subari', '.pdf', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO95-02112018-164249/(Subari)_UTS_PPB_(Kelas-P).pdf', '(Subari)_UTS_PPB_(Kelas-P).pdf', 'Yang bagus dan rapi, nanti orangnya ngamuk ihihi ..', '10 November 2018');
+(81, 'Report Engine 3', '.xlsx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-09012019-163833/Report_TTBG_03012019_035625.xlsx', 'Report_TTBG_03012019_035625.xlsx', 'It is easy and done in 1 minute and gives you access to special discounts and much more!', '11 January 2019'),
+(82, 'Report Engine 3', '.xlsx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-09012019-163833/Report_TTBG_03012019_045500.xlsx', 'Report_TTBG_03012019_045500.xlsx', 'It is easy and done in 1 minute and gives you access to special discounts and much more!', '11 January 2019'),
+(83, 'Print Seting', '.docx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-09012019-163933/Print_Setting_Kontrak.docx', 'Print_Setting_Kontrak.docx', 'It is easy and done in 1 minute and gives you access to special discounts and much more!', '19 January 2019'),
+(84, 'Excel Collection(s)', '.csv', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-09012019-172523/city.csv', 'city.csv', 'You can check all other sites about the prices and compare with us.', '19 January 2019'),
+(85, 'Excel Collection(s)', '.xlsx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-09012019-172523/Upload_Gross_Price.xlsx', 'Upload_Gross_Price.xlsx', 'You can check all other sites about the prices and compare with us.', '19 January 2019'),
+(86, 'Image Collections', '.png', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-10012019-052718/117155_new_512x512.png', '117155_new_512x512.png', 'In order for the log file to actually be written, the "logs" folder must be writable. In addition, you must set the "threshold" for logging in application/config/config.php. You might, for example, only want error messages to be logged, and not the other two types. If you set it to zero logging will be disabled.', '18 January 2019'),
+(87, 'Image Collections', '.png', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-10012019-052718/35857499-a50da39e-0b39-11e8-94c4-63781df4562d.png', '35857499-a50da39e-0b39-11e8-94c4-63781df4562d.png', 'In order for the log file to actually be written, the "logs" folder must be writable. In addition, you must set the "threshold" for logging in application/config/config.php. You might, for example, only want error messages to be logged, and not the other two types. If you set it to zero logging will be disabled.', '18 January 2019'),
+(88, 'Image Collections', '.png', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-10012019-052718/branch_(1).png', 'branch_(1).png', 'In order for the log file to actually be written, the "logs" folder must be writable. In addition, you must set the "threshold" for logging in application/config/config.php. You might, for example, only want error messages to be logged, and not the other two types. If you set it to zero logging will be disabled.', '18 January 2019'),
+(89, 'Image Collections', '.png', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-10012019-052718/bri.png', 'bri.png', 'In order for the log file to actually be written, the "logs" folder must be writable. In addition, you must set the "threshold" for logging in application/config/config.php. You might, for example, only want error messages to be logged, and not the other two types. If you set it to zero logging will be disabled.', '18 January 2019'),
+(90, 'Karangan', '.docx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-10012019-052812/Adakah_yang_lebih_tinggi_dari_Gunung_yang_tidak_akan_pernah_bisa_digapai_oleh_Manusia.docx', 'Adakah_yang_lebih_tinggi_dari_Gunung_yang_tidak_akan_pernah_bisa_digapai_oleh_Manusia.docx', 'Error Messages. These are actual errors, such as PHP errors or user errors.', '18 January 2019'),
+(91, 'Kontrak Pegawai Baru', '.docx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MJST177-19012019-061212/Print_Setting_Kontrak.docx', 'Print_Setting_Kontrak.docx', 'With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process will not take you more than a minute!\r\n\r\n', '20 January 2019'),
+(92, 'Kewirausahaan II', '.xlsx', 'E:/xampp/htdocs/project-codeigniter/smart-print/assets/images/uploads/upload-documents/MSTRO177-19012019-084405/Upload_Gross_Price.xlsx', 'Upload_Gross_Price.xlsx', 'Oke bro .', '18 January 2019');
 
 --
 -- Indexes for dumped tables
@@ -432,7 +446,8 @@ ALTER TABLE `ms_role`
 --
 ALTER TABLE `ms_user`
   ADD PRIMARY KEY (`UserId`),
-  ADD UNIQUE KEY `UserEmail` (`UserEmail`);
+  ADD UNIQUE KEY `UserEmail` (`UserEmail`),
+  ADD KEY `RoleId` (`RoleId`);
 
 --
 -- Indexes for table `ms_user_role`
@@ -505,7 +520,7 @@ ALTER TABLE `ms_role`
 -- AUTO_INCREMENT for table `ms_user`
 --
 ALTER TABLE `ms_user`
-  MODIFY `UserId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+  MODIFY `UserId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 --
 -- AUTO_INCREMENT for table `ms_user_role`
 --
@@ -515,7 +530,7 @@ ALTER TABLE `ms_user_role`
 -- AUTO_INCREMENT for table `tr_document_detail`
 --
 ALTER TABLE `tr_document_detail`
-  MODIFY `DocumentId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `DocumentId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
